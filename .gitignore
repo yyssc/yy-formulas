@@ -1,0 +1,11 @@
+.build
+.vscode
+.cache
+node_modules
+dist
+assets/**/*.css
+build
+lib
+es
+yarn.lock
+package-lock.json

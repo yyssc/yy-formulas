@@ -1,0 +1,75 @@
+{
+  "name": "yy-formulas",
+  "version": "1.0.0",
+  "description": "yy formulas fc",
+  "main": "./lib/index",
+  "module": "./es/index",
+  "files": [
+    "assets/*.css",
+    "assets/*.png",
+    "assets/*.gif",
+    "es",
+    "lib"
+  ],
+  "config": {
+    "port": 8000,
+    "entry": {
+      "index": [
+        "./assets/index.less",
+        "./src/index.jsx"
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint src/**",
+    "build": "rc-tools run build",
+    "pub": "rc-tools run pub",
+    "compile": "rc-tools run compile --babel-runtime",
+    "gh-pages": "npm run build && rc-tools run gh-pages",
+    "start": "webpack && webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyssc/yy-formulas.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "formulas",
+    "fc",
+    "yy"
+  ],
+  "author": {
+    "name": "zhangtongchuan",
+    "email": "zhangtch@yonyou.com",
+    "url": "https://github.com/tongchuan"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yyssc/yy-formulas/issues"
+  },
+  "homepage": "https://github.com/yyssc/yy-formulas#readme",
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint-loader": "^2.1.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.8.4",
+    "react-lifecycles-compat": "^3.0.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.1",
+    "eslint-plugin-react": "^7.12.4",
+    "rc-tools": "^9.3.11"
+  }
+}
