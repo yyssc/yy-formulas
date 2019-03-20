@@ -103,7 +103,6 @@ class Formulas extends React.Component {
         this.yyFormulasTextareaRef.current.selectionEnd = this.state.value.length
       })
     }
-    // this.yyFormulasTextareaRef.current.insertText(val)
   }
 
   onDesc(key){

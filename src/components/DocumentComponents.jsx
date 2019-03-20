@@ -8,22 +8,28 @@ class DocumentComponents extends React.Component {
     super(props)
     this.onSelect = this.onSelect.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onButClick = this.onButClick.bind(this)
+    this.loop = this.loop.bind(this)
     this.state = {
+      selectedKeys: [],
       value: ''
     }
   }
 
   onSelect(selectkey) {
+    // console.log([selectkey,...arr])
+    let selectedKeys = []
     if(selectkey.length > 0){
+      selectedKeys = selectkey
       let code = selectkey[0]
       let key = code.substr(code.indexOf('.') + 1)
-      // console.log(code, key)
+      this.props.onInsertValue(' '+key+ ' ')
+    }else if(this.state.selectedKeys.length > 0){
+      let code = this.state.selectedKeys[0]
+      let key = code.substr(code.indexOf('.') + 1)
       this.props.onInsertValue(' '+key+ ' ')
     }
-    // if(selectkey.length > 0){
-    //   // let code = node.node.props
-    // }
-    // console.log(arr)
+    this.setState({selectedKeys})
   }
 
   onChange(event) {
@@ -31,47 +37,92 @@ class DocumentComponents extends React.Component {
     this.setState({value})
   }
 
-  render() {
-    let { DocumentTreeData } = this.props
+  onButClick(){
     let value = this.state.value
-    const loop = (data)=>{
-      // console.log(data)
-      return data.map((item)=>{
-        let isflag = false
-        if(value && value.length > 0){
-          let reg = new RegExp(value,'igm')
-          isflag = reg.test(item.title)
-          // console.log(isflag)
-        }else{
-          // console.log(isflag)
+    let selectedKeys = this.state.selectedKeys
+    let selectedKeysList = []
+    let { DocumentTreeData } = this.props
+    const loop = (data) => {
+      data.map((item)=>{
+        let reg = new RegExp(value,'igm')
+        if(reg.test(item.title)){
+          selectedKeysList.push(item.key)
         }
         if(item.children && item.children.length > 0){
-          return (
-            <TreeNode
-              title={item.title}
-              isLeaf={false}
-              key={item.key}
-              code={item.code}
-              disabled={item.disabled}
-              className={isflag ? 'yy-search-selected' : ''}
-            >
-              {loop(item.children)}
-            </TreeNode>
-          )
-        }else{
-          return (
-            <TreeNode
-              title={item.title}
-              isLeaf
-              key={item.key}
-              code={item.code}
-              disabled={item.disabled}
-              className={isflag ? 'yy-search-selected' : ''}
-            />
-          )
+          loop(item.children)
         }
       })
     }
+    if(value){
+      loop(DocumentTreeData)
+      if(selectedKeysList.length > 0){
+        if(selectedKeys.length === 0) {
+          selectedKeys.push(selectedKeysList[0])
+        }else{
+          if(selectedKeysList.includes(selectedKeys[0])){
+            let index = selectedKeysList.indexOf(selectedKeys[0])
+            if(selectedKeysList.length>index){
+              selectedKeys = [selectedKeysList[index+1]]
+            }else{
+              selectedKeys = [selectedKeysList[0]]
+            }
+          }else{
+            selectedKeys=[selectedKeysList[0]]
+          }
+        }
+      }
+      this.setState({selectedKeys})
+    }
+    console.log([selectedKeysList,value,selectedKeys])
+  }
+
+  loop(data){
+    return data.map((item)=>{
+      // let isflag = false
+      // if(value && value.length > 0){
+      //   let reg = new RegExp(value,'igm')
+      //   if(reg.test(item.title)){
+      //     selectedKeys.push(item.key)
+      //   }
+      //   // console.log(isflag)
+      // }else{
+      //   // console.log(isflag)
+      // }
+      if(item.children && item.children.length > 0){
+        return (
+          <TreeNode
+            title={item.title}
+            isLeaf={false}
+            key={item.key}
+            code={item.code}
+            disabled={item.disabled}
+            //className={isflag ? 'yy-search-selected' : ''}
+          >
+            {this.loop(item.children)}
+          </TreeNode>
+        )
+      }else{
+        return (
+          <TreeNode
+            title={item.title}
+            isLeaf
+            key={item.key}
+            code={item.code}
+            disabled={item.disabled}
+            //className={isflag ? 'yy-search-selected' : ''}
+          />
+        )
+      }
+    })
+  }
+
+  render() {
+    let { DocumentTreeData } = this.props
+    // let value = this.state.value
+    // let selectedKeys = []
+    // const loop = (data)=>{
+    //   // console.log(data)
+    // }
     return (
       <div className="yy-tab-content">
         <form className="form-inline">
@@ -82,6 +133,14 @@ class DocumentComponents extends React.Component {
               onChange={this.onChange}
               value={this.state.value}
             />
+            <button
+              style={{marginLeft: '10px'}}
+              className="btn btn-default"
+              onClick={this.onButClick}
+              type="button"
+            >
+              确定
+            </button>
           </div>
         </form>
         <Tree
@@ -92,9 +151,10 @@ class DocumentComponents extends React.Component {
           defaultExpandAll
           className="myCls"
           autoExpandParent
+          selectedKeys={this.state.selectedKeys}
           onSelect={this.onSelect}
         >
-          {loop(DocumentTreeData)}
+          {this.loop(DocumentTreeData)}
         </Tree>
       </div>
       // <div>{JSON.stringify(this.props.item)}单据字段单据字段单据字段单据字段单据字段</div>

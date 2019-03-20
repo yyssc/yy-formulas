@@ -123,6 +123,7 @@ class ReferComponents extends React.Component {
         disabled={disabled}
         onFocus={this.onFocus}
         // onSearch={this.onSearch}
+        notFoundContent="暂无数据"
         onChange={this.onChange}
         onSelect={this.onSelect}
         value={this.state.value}

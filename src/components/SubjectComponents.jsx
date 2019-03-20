@@ -150,12 +150,14 @@ class SubjectComponents extends React.Component {
                 <div className="col-sm-10">
                   <TreeSelect
                     showSearch
+                    showLine
                     style={{width:'100%'}}
                     value={item.value}
                     dropdownStyle={{ maxHeight: 300, overflow: 'auto' }}
-                    placeholder="Please select"
+                    placeholder="请输入..."
+                    notFoundContent="暂无数据"
                     allowClear
-                    // treeDefaultExpandAll
+                    treeDefaultExpandAll
                     onChange={this.onTreeSelectChange.bind(this,item,index)}
                   >
                     {loop(DocumentTreeData)}
