@@ -6,8 +6,9 @@ import TabsComponents from './components/TabsComponents'
 class Formulas extends React.Component {
   constructor(props){
     super(props)
-    this.onCancel = this.onCancel.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onClick = this.onClick.bind(this)
+    this.onCancel = this.onCancel.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onValidate = this.onValidate.bind(this)
     this.onValueSelected = this.onValueSelected.bind(this)
@@ -42,15 +43,23 @@ class Formulas extends React.Component {
     }
   }
 
-  onCancel() {
-    this.props.onCancel(this.state.value)
-  }
-
   onChange(event){
     let { value } = event.target
     this.setState({ value },()=>{
       this.props.onChange(value)
     })
+  }
+
+  onClick(item){
+    if(this[item.event]){
+      this[item.event]()
+    }else if(this.props[item.event]){
+      this.props[item.event](this.state.value)
+    }
+  }
+
+  onCancel() {
+    this.props.onCancel(this.state.value)
   }
 
   onSubmit(){
@@ -62,10 +71,7 @@ class Formulas extends React.Component {
   }
 
   onValueSelected() {
-    // console.log(this)
-    // console.log(this.yyFormulasTextareaRef)
     this.yyFormulasTextareaRef.current.select()
-    // this.yyFormulasTextarea.select()
   }
 
   onClear(){
@@ -75,8 +81,6 @@ class Formulas extends React.Component {
   }
 
   onInsertValue(val){
-    // console.log(this.yyFormulasTextareaRef)
-    // console.log(val)
     if(document.selection){
       var sel = document.selection.createRange()
       sel.text = val
@@ -91,9 +95,6 @@ class Formulas extends React.Component {
         this.yyFormulasTextareaRef.current.selectionStart = this.state.value.length
         this.yyFormulasTextareaRef.current.selectionEnd = this.state.value.length
       })
-      // cursorPos += str.length
-      // textarea.selectionStart = cursorPos
-      // textarea.selectionEnd = cursorPos
     }else{
       this.setState({
         value: val
@@ -113,7 +114,7 @@ class Formulas extends React.Component {
   }
 
   render() {
-    let { prefixCls, textareaPlaceholder, elementButtons, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData } = this.props
+    let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData } = this.props
     return (
       <div className={prefixCls}>
         <div className="row">
@@ -127,45 +128,17 @@ class Formulas extends React.Component {
             />
           </div>
           <div className={prefixCls + '-button-warp col-xs-2 col-md-2 col-sm-2'}>
-            {elementButtons ? elementButtons : (
-              <React.Fragment>
+            {buttonList.map((item, index)=>{
+              return (
                 <button
-                  className={prefixCls + '-button btn btn-default'}
-                  onClick={this.onSubmit}
-                  type="button"
+                  key={index}
+                  className={prefixCls + '-button ' + item.className}
+                  onClick={this.onClick.bind(this,item)}
                 >
-                  确定
+                  {item.name}
                 </button>
-                <button
-                  className={prefixCls + '-button btn btn-default'}
-                  onClick={this.onCancel}
-                  type="button"
-                >
-                  取消
-                </button>
-                <button
-                  className={prefixCls + '-button btn btn-default'}
-                  onClick={this.onValidate}
-                  type="button"
-                >
-                  验证
-                </button>
-                <button
-                  className={prefixCls + '-button btn btn-default'}
-                  onClick={this.onValueSelected}
-                  type="button"
-                >
-                  全选
-                </button>
-                <button
-                  className={prefixCls + '-button btn btn-default'}
-                  onClick={this.onClear}
-                  type="button"
-                >
-                  清空
-                </button>
-              </React.Fragment>
-            )}
+              )
+            })}
           </div>
         </div>
         <div className="row">
@@ -193,7 +166,7 @@ Formulas.propTypes = {
   prefixCls: PropTypes.string,
   textareaPlaceholder: PropTypes.string,
   textareaValue: PropTypes.string,
-  elementButtons: PropTypes.node,
+  buttonList: PropTypes.array,
   onCancel: PropTypes.func,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -204,14 +177,20 @@ Formulas.propTypes = {
   DocumentTreeData: PropTypes.array,
   ReferDataUrl: PropTypes.string,
   fixedData: PropTypes.object,
-  name: PropTypes.string
+  Description: PropTypes.object
 }
 
 Formulas.defaultProps = {
   prefixCls: 'yy-formulas',
   textareaPlaceholder: '请输入...',
   textareaValue: '',
-  elementButtons: null,
+  buttonList: [
+    {name: '确定', className: 'btn btn-default', event: 'onSubmit'},
+    {name: '取消', className: 'btn btn-default', event: 'onCancel'},
+    {name: '验证', className: 'btn btn-default', event: 'onValidate'},
+    {name: '全选', className: 'btn btn-default', event: 'onValueSelected'},
+    {name: '清空', className: 'btn btn-default', event: 'onClear'}
+  ],
   onCancel: noop,
   onChange: noop,
   onSubmit: noop,
@@ -226,7 +205,7 @@ Formulas.defaultProps = {
   DocumentTreeData: [],
   ReferDataUrl: '',
   fixedData: {},
-  name: '1211'
+  Description: {}
 }
 
 polyfill(Formulas)

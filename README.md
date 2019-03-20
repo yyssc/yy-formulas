@@ -106,7 +106,13 @@ React.render(
 | fixedData | Fixed component data | Array[Object]| [] |
 | SubjectData | Subject component data | Array[Object] | [] |
 | Description | formulas desc | Object[key:value] | {} |
-
+| buttonList | Button List and event | Array<Object>| [
+  {name: '确定', className: 'btn btn-default', event: 'onSubmit'},
+  {name: '取消', className: 'btn btn-default', event: 'onCancel'},
+  {name: '验证', className: 'btn btn-default', event: 'onValidate'},
+  {name: '全选', className: 'btn btn-default', event: 'onValueSelected'},
+  {name: '清空', className: 'btn btn-default', event: 'onClear'}
+] |
 
 ## License
 
