@@ -34,7 +34,7 @@ npm run compile
 
 ## Example
 
-https://github.com/yyssc/yy-formulas
+https://yyssc.github.io/yy-formulas/
 
 ## Usage
 
@@ -106,9 +106,7 @@ React.render(
 | fixedData | Fixed component data | Array[Object]| [] |
 | SubjectData | Subject component data | Array[Object] | [] |
 | Description | formulas desc | Object[key:value] | {} |
-|||||
-|||||
-|||||
+
 
 ## License
 
