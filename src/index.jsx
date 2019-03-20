@@ -1,4 +1,4 @@
-import Formulas from './Formulas';
+import Formulas from './Formulas'
 
 export { Formulas }
-export default Formulas;
+export default Formulas

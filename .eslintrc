@@ -5,7 +5,8 @@
     "es6": true
   },
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   "globals": {
     "$": true,
@@ -25,11 +26,14 @@
     "react"
   ],
   "rules": {
+    "array-bracket-spacing": 0,
+    "array-callback-return": 0,
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
     "quotes": [2, "single"],
     "no-console": 0,
     "no-debugger": 2,
     "no-var": 0,
-    "semi": 0,
+    "semi": ["error", "never"],
     "no-irregular-whitespace": 0,
     "no-trailing-spaces": 1,
     "eol-last": 0,
@@ -59,7 +63,7 @@
     "react/jsx-boolean-value": 2,
     "react/jsx-closing-bracket-location": 1,
     "react/jsx-curly-spacing": [2, {"when": "never", "children": true}],
-    "react/jsx-indent-props": [2, 4],
+    "react/jsx-indent": 0,
     "react/jsx-key": 2,
     "react/jsx-max-props-per-line": [1, {"maximum": 1}],
     "react/jsx-no-bind": 0,
@@ -67,7 +71,7 @@
     "react/jsx-no-literals": 0,
     "react/jsx-no-undef": 1,
     "react/jsx-pascal-case": 0,
-    "react/jsx-sort-props": 2,
+    "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 2,
     "react/no-danger": 0,
@@ -84,14 +88,14 @@
     "react/sort-comp": 2,
     "no-extra-boolean-cast": 0,
     "react/no-array-index-key": 0,
-    "react/no-deprecated": 1,
+    "react/no-deprecated": 0,
     "react/jsx-equals-spacing": 2,
     "no-unreachable": 1,
     "comma-dangle": 2,
-    "no-mixed-spaces-and-tabs": 0,
     "prefer-arrow-callback": 0,
     "arrow-parens": 0,
-    "arrow-spacing": 0
+    "arrow-spacing": 0,
+    "indent": ["error",2,{"SwitchCase": 1}]
   },
   "settings": {
     "import/ignore": [
