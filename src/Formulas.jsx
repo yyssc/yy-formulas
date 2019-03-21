@@ -82,7 +82,7 @@ class Formulas extends React.Component {
   }
 
   onInsertValue(val){
-    console.log([this,this.yyFormulasTextareaRef])
+    // console.log([this,this.yyFormulasTextareaRef])
     let yyFormulasTextareaRef = this.yyFormulasTextareaRef // this.yyFormulasTextareaRef.current
     if(document.selection){
       var sel = document.selection.createRange()

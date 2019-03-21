@@ -73,7 +73,7 @@ class DocumentComponents extends React.Component {
       }
       this.setState({selectedKeys})
     }
-    console.log([selectedKeysList,value,selectedKeys])
+    // console.log([selectedKeysList,value,selectedKeys])
   }
 
   loop(data){
@@ -133,15 +133,15 @@ class DocumentComponents extends React.Component {
               onChange={this.onChange}
               value={this.state.value}
             />
-            <button
-              style={{marginLeft: '10px'}}
-              className="btn btn-default"
-              onClick={this.onButClick}
-              type="button"
-            >
-              确定
-            </button>
           </div>
+          <button
+            style={{marginLeft: '10px'}}
+            className="btn btn-default"
+            onClick={this.onButClick}
+            type="button"
+          >
+            确定
+          </button>
         </form>
         <Tree
           prefixCls="rc-tree"

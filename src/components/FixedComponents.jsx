@@ -15,7 +15,7 @@ class FixedComponents extends React.Component {
   }
 
   onChange(type,value){
-    console.log([type,value])
+    // console.log([type,value])
     this.setState({
       [type]: value
     },()=>{
@@ -26,7 +26,7 @@ class FixedComponents extends React.Component {
         this.setState({recordValue: {}})
       }
       if(type==='recordValue' && value.id){
-        this.props.onInsertValue(' getID("'+this.state.record.code+'","'+value.text+'","'+value.id+'") ')
+        this.props.onInsertValue(' getID("'+this.state.record.code+'","'+value.title+'","'+value.id+'") ')
         this.props.onDesc('getID')
       }
     })

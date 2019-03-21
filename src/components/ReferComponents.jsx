@@ -15,15 +15,14 @@ class ReferComponents extends React.Component {
     this.state = {
       options: [],
       searchValue: '',
-      value: this.props.value && this.props.value.text
+      value: this.props.value && this.props.value.title ? this.props.value && this.props.value.title : ''
     }
   }
 
   componentWillReceiveProps(nextProps){
     if(JSON.stringify(nextProps.value)!=JSON.stringify(this.state.value)){
-      console.log(nextProps.value)
       this.setState({
-        value: nextProps.value.text
+        value: nextProps.value.title
       })
     }
   }
@@ -32,7 +31,6 @@ class ReferComponents extends React.Component {
     this.setState({
       searchValue
     })
-    // console.log(['search',...arr])
   }
 
   onFocus(){
@@ -66,7 +64,12 @@ class ReferComponents extends React.Component {
 
   onSelect(...arr) {
     let key = arr[1].key
-    let { id, value, code, text } = arr[1].props
+    let { id, value, code, title } = arr[1].props
+    this.state.options.forEach((item)=>{
+      if(item.id === id){
+        code =  item.code
+      }
+    })
     // console.log([{key, id, value, code }])
     // this.setState({
     //   value: arr[0]
@@ -74,9 +77,9 @@ class ReferComponents extends React.Component {
     this.setState({
       value
     },()=>{
-      this.props.onChange({id, value, code, key, text})
+      this.props.onChange({id, value, code, key, title})
     })
-    console.log(['select',...arr])
+    // console.log(['select',...arr])
   }
 
   onChange(value) {
@@ -132,9 +135,9 @@ class ReferComponents extends React.Component {
           return (
             <Option
               value={item.code+' '+item.name}
-              text={item.name}
+              title={item.name}
               id={item.id}
-              code={item.code}
+              // ode={item.code}
               key={item.id}
               disabled={item.disabled}
             >
@@ -159,7 +162,7 @@ ReferComponents.propTypes = {
   beforeSend: PropTypes.func,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  value: PropTypes.array,
+  value: PropTypes.object,
   isCode: PropTypes.bool
 }
 
@@ -178,7 +181,7 @@ ReferComponents.defaultProps = {
   beforeSend: noop,
   onChange: noop,
   disabled: false,
-  value: [],
+  value: {},
   isCode: false
 }
 

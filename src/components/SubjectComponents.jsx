@@ -61,7 +61,7 @@ class SubjectComponents extends React.Component {
   render() {
     let { DocumentTreeData } = this.props
     // let value = this.state.value
-    console.log(DocumentTreeData)
+    // console.log(DocumentTreeData)
     const loop = (data)=>{
       // console.log(data)
       return data.map((item)=>{
@@ -160,7 +160,7 @@ class SubjectComponents extends React.Component {
                     treeDefaultExpandAll
                     onChange={this.onTreeSelectChange.bind(this,item,index)}
                   >
-                    {loop(DocumentTreeData)}
+                    {loop(JSON.parse(JSON.stringify(DocumentTreeData)))}
                   </TreeSelect>
                 </div>
               </div>
