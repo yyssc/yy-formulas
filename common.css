@@ -1931,6 +1931,7 @@ li.rc-select-dropdown-menu-item-divider {
 .yy-formulas .rc-tree {
   height: auto;
   max-height: 300px;
+  overflow: auto;
 }
 .yy-formulas .yy-search-selected .rc-tree-node-content-wrapper {
   font-weight: bold;
@@ -1958,4 +1959,4 @@ li.rc-select-dropdown-menu-item-divider {
 }
 
 
-/*# sourceMappingURL=formulas.css.map*/
+/*# sourceMappingURL=common.css.map*/

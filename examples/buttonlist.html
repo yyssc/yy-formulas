@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>formulas.js - example - yy-formulas@1.0.0</title>
+  <title>buttonlist.js - example - yy-formulas@1.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -282,28 +282,29 @@ class Demo extends React.Component {
     this.state = {
       extareaValue: <span class="hljs-string">'11'</span>
     }
-    this.onChange = this.onChange.bind(this)
-    // console.log(Button)
+    this.onCancel = this.onCancel.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onValidate = this.onValidate.bind(this)
+    this.onZiDingYi = this.onZiDingYi.bind(this)
   }
 
-  componentDidMount() {
-    // setInterval(()=&gt;{
-    //   this.setState({textareaValue: <span class="hljs-string">'十秒钟后value变化：'</span>+Math.random()})
-    // },10000)
+  onCancel(value) {
+    console.log([<span class="hljs-string">'onCancel'</span>, value])
   }
-  /**
-    text值变化的时候会调用 onChange方法
-    多数不用此方法，只要坚挺 onSubmit 方法返回的值
-  */
-  onChange(value) {
-    console.log(value)
-    console.log(value)
+
+  onSubmit(value) {
+    console.log([<span class="hljs-string">'onSubmit'</span>, value])
+  }
+
+  onValidate(value) {
+    console.log([<span class="hljs-string">'onValidate'</span>, value])
+  }
+
+  onZiDingYi(value) {
+    console.log([<span class="hljs-string">'onZiDingYi'</span>, value])
   }
 
   render() {
-    // console.log(DocumentTreeData)
-    // var sg = <span class="hljs-string">'dd'</span>
-    // return (&lt;div&gt;222&lt;/div&gt;)
     return (
       &lt;Formulas
         onChange={this.onChange}
@@ -313,6 +314,18 @@ class Demo extends React.Component {
         fixedData={{refCode:<span class="hljs-string">'entity'</span>,funcode:<span class="hljs-string">'conversion'</span>,disableshow: false}}
         SubjectData={SubjectData}
         Description={Description}
+        onCancel={this.onCancel}
+        onSubmit={this.onSubmit}
+        onValidate={this.onValidate}
+        onZiDingYi={this.onZiDingYi}
+        buttonList={[
+          {name: <span class="hljs-string">'确定'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onSubmit'</span>},/*默认 事件可以自定义*/
+          {name: <span class="hljs-string">'取消'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onCancel'</span>},/*默认 事件可以自定义*/
+          {name: <span class="hljs-string">'验证'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onValidate'</span>},/*默认 事件可以自定义*/
+          {name: <span class="hljs-string">'全选'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onValueSelected'</span>},/*默认 内部事件*/
+          {name: <span class="hljs-string">'清空'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onClear'</span>},/*默认 内部事件*/
+          {name: <span class="hljs-string">'自己定义'</span>, className: <span class="hljs-string">'btn btn-default'</span>, event: <span class="hljs-string">'onZiDingYi'</span>}/*自定义 事件自定义*/
+        ]}
       /&gt;
     )
   }
@@ -328,7 +341,7 @@ ReactDOM.render(&lt;Demo /&gt;, document.getElementById(<span class="hljs-string
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="../common.js?nowrap"></script>
-  <script src="formulas.js?nowrap"></script>
+  <script src="buttonlist.js?nowrap"></script>
 </body>
 
 </html>

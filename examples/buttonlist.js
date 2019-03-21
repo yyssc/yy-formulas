@@ -56,7 +56,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/formulas": 0
+/******/ 		"examples/buttonlist": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -147,17 +147,17 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([1,"common"]);
+/******/ 	deferredModules.push([0,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/formulas.jsx":
-/*!*******************************!*\
-  !*** ./examples/formulas.jsx ***!
-  \*******************************/
+/***/ "./examples/buttonlist.jsx":
+/*!*********************************!*\
+  !*** ./examples/buttonlist.jsx ***!
+  \*********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -211,34 +211,36 @@ function (_React$Component) {
     _this.state = {
       extareaValue: '11'
     };
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this)); // console.log(Button)
-
+    _this.onCancel = _this.onCancel.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.onValidate = _this.onValidate.bind(_assertThisInitialized(_this));
+    _this.onZiDingYi = _this.onZiDingYi.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Demo, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {} // setInterval(()=>{
-    //   this.setState({textareaValue: '十秒钟后value变化：'+Math.random()})
-    // },10000)
-
-    /**
-      text值变化的时候会调用 onChange方法
-      多数不用此方法，只要坚挺 onSubmit 方法返回的值
-    */
-
+    key: "onCancel",
+    value: function onCancel(value) {
+      console.log(['onCancel', value]);
+    }
   }, {
-    key: "onChange",
-    value: function onChange(value) {
-      console.log(value);
-      console.log(value);
+    key: "onSubmit",
+    value: function onSubmit(value) {
+      console.log(['onSubmit', value]);
+    }
+  }, {
+    key: "onValidate",
+    value: function onValidate(value) {
+      console.log(['onValidate', value]);
+    }
+  }, {
+    key: "onZiDingYi",
+    value: function onZiDingYi(value) {
+      console.log(['onZiDingYi', value]);
     }
   }, {
     key: "render",
     value: function render() {
-      // console.log(DocumentTreeData)
-      // var sg = 'dd'
-      // return (<div>222</div>)
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["Formulas"], {
         onChange: this.onChange,
         textareaValue: this.state.textareaValue,
@@ -250,7 +252,48 @@ function (_React$Component) {
           disableshow: false
         },
         SubjectData: !(function webpackMissingModule() { var e = new Error("Cannot find module './SubjectData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-        Description: !(function webpackMissingModule() { var e = new Error("Cannot find module './Description'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+        Description: !(function webpackMissingModule() { var e = new Error("Cannot find module './Description'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+        onCancel: this.onCancel,
+        onSubmit: this.onSubmit,
+        onValidate: this.onValidate,
+        onZiDingYi: this.onZiDingYi,
+        buttonList: [{
+          name: '确定',
+          className: 'btn btn-default',
+          event: 'onSubmit'
+        },
+        /*默认 事件可以自定义*/
+        {
+          name: '取消',
+          className: 'btn btn-default',
+          event: 'onCancel'
+        },
+        /*默认 事件可以自定义*/
+        {
+          name: '验证',
+          className: 'btn btn-default',
+          event: 'onValidate'
+        },
+        /*默认 事件可以自定义*/
+        {
+          name: '全选',
+          className: 'btn btn-default',
+          event: 'onValueSelected'
+        },
+        /*默认 内部事件*/
+        {
+          name: '清空',
+          className: 'btn btn-default',
+          event: 'onClear'
+        },
+        /*默认 内部事件*/
+        {
+          name: '自己定义',
+          className: 'btn btn-default',
+          event: 'onZiDingYi'
+          /*自定义 事件自定义*/
+
+        }]
       });
     }
   }]);
@@ -262,17 +305,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 1:
-/*!*************************************!*\
-  !*** multi ./examples/formulas.jsx ***!
-  \*************************************/
+/***/ 0:
+/*!***************************************!*\
+  !*** multi ./examples/buttonlist.jsx ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/formulas.jsx */"./examples/formulas.jsx");
+module.exports = __webpack_require__(/*! ./examples/buttonlist.jsx */"./examples/buttonlist.jsx");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=formulas.js.map
+//# sourceMappingURL=buttonlist.js.map
