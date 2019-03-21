@@ -64757,7 +64757,7 @@ function (_React$Component) {
         className: "col-sm-2 control-label"
       }, "\u6863\u6848\u503C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-sm-10"
-      }, this.state.record.code === 'accsubject' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, this.state.record.code === 'accsubject' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
         isCode: true,
         fixedData: _extends({}, fixedData, {
@@ -64947,6 +64947,8 @@ function (_React$Component) {
       this.state.options.forEach(function (item) {
         if (item.id === id) {
           code = item.code;
+          title = item.name;
+          value = item.name;
         }
       }); // console.log([{key, id, value, code }])
       // this.setState({
