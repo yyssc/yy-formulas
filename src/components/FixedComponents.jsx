@@ -52,7 +52,7 @@ class FixedComponents extends React.Component {
             <label className="col-sm-2 control-label">档案值</label>
             <div className="col-sm-10">
               {this.state.record.code === 'accsubject' ? (
-                <React.Fragment>
+                <div>
                   <ReferComponents
                     url={ReferDataUrl}
                     isCode
@@ -69,7 +69,7 @@ class FixedComponents extends React.Component {
                     value={this.state.recordValue}
                     onChange={this.onChange.bind(this,'recordValue')}
                   />
-                </React.Fragment>
+                </div>
               ) : (
                 <ReferComponents
                   url={ReferDataUrl}

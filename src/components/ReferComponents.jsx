@@ -68,6 +68,8 @@ class ReferComponents extends React.Component {
     this.state.options.forEach((item)=>{
       if(item.id === id){
         code =  item.code
+        title = item.name
+        value = item.name
       }
     })
     // console.log([{key, id, value, code }])
