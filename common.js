@@ -64145,9 +64145,9 @@ function (_React$Component) {
       activeKey: _this.props.activeKey,
       DocumentTreeData: _this.props.DocumentTreeData,
       DocumentTreeDataJSON: JSON.stringify(_this.props.DocumentTreeData),
-      textDescription: ''
+      textDescription: '' // this.yyFormulasTextareaRef = React.createRef()
+
     };
-    _this.yyFormulasTextareaRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
@@ -64220,7 +64220,8 @@ function (_React$Component) {
   }, {
     key: "onValueSelected",
     value: function onValueSelected() {
-      this.yyFormulasTextareaRef.current.select();
+      // this.yyFormulasTextareaRef.current.select()
+      this.yyFormulasTextareaRef.select();
     }
   }, {
     key: "onClear",
@@ -64238,26 +64239,29 @@ function (_React$Component) {
     value: function onInsertValue(val) {
       var _this4 = this;
 
+      console.log([this, this.yyFormulasTextareaRef]);
+      var yyFormulasTextareaRef = this.yyFormulasTextareaRef; // this.yyFormulasTextareaRef.current
+
       if (document.selection) {
         var sel = document.selection.createRange();
         sel.text = val;
-      } else if (typeof this.yyFormulasTextareaRef.current.selectionStart === 'number' && typeof this.yyFormulasTextareaRef.current.selectionEnd === 'number') {
-        var startPos = this.yyFormulasTextareaRef.current.selectionStart;
-        var endPos = this.yyFormulasTextareaRef.current.selectionEnd;
+      } else if (typeof yyFormulasTextareaRef.selectionStart === 'number' && typeof yyFormulasTextareaRef.selectionEnd === 'number') {
+        var startPos = yyFormulasTextareaRef.selectionStart;
+        var endPos = yyFormulasTextareaRef.selectionEnd;
         var tmpStr = this.state.value;
         var value = tmpStr.substring(0, startPos) + val + tmpStr.substring(endPos, tmpStr.length);
         this.setState({
           value: value
         }, function () {
-          _this4.yyFormulasTextareaRef.current.selectionStart = _this4.state.value.length;
-          _this4.yyFormulasTextareaRef.current.selectionEnd = _this4.state.value.length;
+          yyFormulasTextareaRef.selectionStart = _this4.state.value.length;
+          yyFormulasTextareaRef.selectionEnd = _this4.state.value.length;
         });
       } else {
         this.setState({
           value: val
         }, function () {
-          _this4.yyFormulasTextareaRef.current.selectionStart = _this4.state.value.length;
-          _this4.yyFormulasTextareaRef.current.selectionEnd = _this4.state.value.length;
+          yyFormulasTextareaRef.selectionStart = _this4.state.value.length;
+          yyFormulasTextareaRef.selectionEnd = _this4.state.value.length;
         });
       }
     }
@@ -64292,7 +64296,9 @@ function (_React$Component) {
         className: prefixCls + '-textarea form-control',
         onChange: this.onChange,
         placeholder: textareaPlaceholder,
-        ref: this.yyFormulasTextareaRef,
+        ref: function ref(_ref) {
+          return _this5.yyFormulasTextareaRef = _ref;
+        },
         value: this.state.value
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: prefixCls + '-button-warp col-xs-2 col-md-2 col-sm-2'
@@ -65396,8 +65402,8 @@ function (_React$Component) {
           ReferDataUrl = _this$props.ReferDataUrl,
           fixedData = _this$props.fixedData,
           SubjectData = _this$props.SubjectData,
-          onDesc = _this$props.onDesc;
-      console.log(this.props);
+          onDesc = _this$props.onDesc; // console.log(this.props)
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tabs__WEBPACK_IMPORTED_MODULE_3__["default"], {
         prefixCls: prefixCls,
         defaultActiveKey: this.state.activeKey,
