@@ -31,7 +31,7 @@ class TabsComponents extends React.Component {
 
   render() {
     let { prefixCls, tabs, DocumentTreeData, ReferDataUrl, fixedData, SubjectData,onDesc } =  this.props
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <Tabs
         prefixCls={prefixCls}

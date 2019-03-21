@@ -24,7 +24,7 @@ class Formulas extends React.Component {
       DocumentTreeDataJSON: JSON.stringify(this.props.DocumentTreeData),
       textDescription: ''
     }
-    this.yyFormulasTextareaRef = React.createRef()
+    // this.yyFormulasTextareaRef = React.createRef()
   }
 
   componentWillReceiveProps(nextProps){
@@ -71,7 +71,8 @@ class Formulas extends React.Component {
   }
 
   onValueSelected() {
-    this.yyFormulasTextareaRef.current.select()
+    // this.yyFormulasTextareaRef.current.select()
+    this.yyFormulasTextareaRef.select()
   }
 
   onClear(){
@@ -81,26 +82,28 @@ class Formulas extends React.Component {
   }
 
   onInsertValue(val){
+    console.log([this,this.yyFormulasTextareaRef])
+    let yyFormulasTextareaRef = this.yyFormulasTextareaRef // this.yyFormulasTextareaRef.current
     if(document.selection){
       var sel = document.selection.createRange()
       sel.text = val
-    }else if(typeof this.yyFormulasTextareaRef.current.selectionStart === 'number' && typeof this.yyFormulasTextareaRef.current.selectionEnd === 'number'){
-      const startPos = this.yyFormulasTextareaRef.current.selectionStart
-      const endPos = this.yyFormulasTextareaRef.current.selectionEnd
+    }else if(typeof yyFormulasTextareaRef.selectionStart === 'number' && typeof yyFormulasTextareaRef.selectionEnd === 'number'){
+      const startPos = yyFormulasTextareaRef.selectionStart
+      const endPos = yyFormulasTextareaRef.selectionEnd
       const tmpStr = this.state.value
       let value = tmpStr.substring(0, startPos) + val + tmpStr.substring(endPos, tmpStr.length)
       this.setState({
         value
       },()=>{
-        this.yyFormulasTextareaRef.current.selectionStart = this.state.value.length
-        this.yyFormulasTextareaRef.current.selectionEnd = this.state.value.length
+        yyFormulasTextareaRef.selectionStart = this.state.value.length
+        yyFormulasTextareaRef.selectionEnd = this.state.value.length
       })
     }else{
       this.setState({
         value: val
       },()=>{
-        this.yyFormulasTextareaRef.current.selectionStart = this.state.value.length
-        this.yyFormulasTextareaRef.current.selectionEnd = this.state.value.length
+        yyFormulasTextareaRef.selectionStart = this.state.value.length
+        yyFormulasTextareaRef.selectionEnd = this.state.value.length
       })
     }
   }
@@ -122,7 +125,7 @@ class Formulas extends React.Component {
               className={prefixCls + '-textarea form-control'}
               onChange={this.onChange}
               placeholder={textareaPlaceholder}
-              ref={this.yyFormulasTextareaRef}
+              ref={(ref)=>this.yyFormulasTextareaRef=ref}
               value={this.state.value}
             />
           </div>
