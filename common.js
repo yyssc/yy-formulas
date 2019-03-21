@@ -64239,7 +64239,7 @@ function (_React$Component) {
     value: function onInsertValue(val) {
       var _this4 = this;
 
-      console.log([this, this.yyFormulasTextareaRef]);
+      // console.log([this,this.yyFormulasTextareaRef])
       var yyFormulasTextareaRef = this.yyFormulasTextareaRef; // this.yyFormulasTextareaRef.current
 
       if (document.selection) {
@@ -64546,9 +64546,8 @@ function (_React$Component) {
         this.setState({
           selectedKeys: selectedKeys
         });
-      }
+      } // console.log([selectedKeysList,value,selectedKeys])
 
-      console.log([selectedKeysList, value, selectedKeys]);
     }
   }, {
     key: "loop",
@@ -64606,14 +64605,14 @@ function (_React$Component) {
         className: "form-control",
         onChange: this.onChange,
         value: this.state.value
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           marginLeft: '10px'
         },
         className: "btn btn-default",
         onClick: this.onButClick,
         type: "button"
-      }, "\u786E\u5B9A"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, "\u786E\u5B9A")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["default"], {
         prefixCls: "rc-tree",
         showLine: true,
         showIcon: false,
@@ -64709,7 +64708,7 @@ function (_React$Component) {
     value: function onChange(type, value) {
       var _this2 = this;
 
-      console.log([type, value]);
+      // console.log([type,value])
       this.setState(_defineProperty({}, type, value), function () {
         if (type === 'record') {
           _this2.setState({
@@ -64725,7 +64724,7 @@ function (_React$Component) {
         }
 
         if (type === 'recordValue' && value.id) {
-          _this2.props.onInsertValue(' getID("' + _this2.state.record.code + '","' + value.text + '","' + value.id + '") ');
+          _this2.props.onInsertValue(' getID("' + _this2.state.record.code + '","' + value.title + '","' + value.id + '") ');
 
           _this2.props.onDesc('getID');
         }
@@ -64874,7 +64873,7 @@ function (_React$Component) {
     _this.state = {
       options: [],
       searchValue: '',
-      value: _this.props.value && _this.props.value.text
+      value: _this.props.value && _this.props.value.title ? _this.props.value && _this.props.value.title : ''
     };
     return _this;
   }
@@ -64883,9 +64882,8 @@ function (_React$Component) {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       if (JSON.stringify(nextProps.value) != JSON.stringify(this.state.value)) {
-        console.log(nextProps.value);
         this.setState({
-          value: nextProps.value.text
+          value: nextProps.value.title
         });
       }
     }
@@ -64894,7 +64892,7 @@ function (_React$Component) {
     value: function onSearch(searchValue) {
       this.setState({
         searchValue: searchValue
-      }); // console.log(['search',...arr])
+      });
     }
   }, {
     key: "onFocus",
@@ -64945,7 +64943,12 @@ function (_React$Component) {
           id = _arr$1$props.id,
           value = _arr$1$props.value,
           code = _arr$1$props.code,
-          text = _arr$1$props.text; // console.log([{key, id, value, code }])
+          title = _arr$1$props.title;
+      this.state.options.forEach(function (item) {
+        if (item.id === id) {
+          code = item.code;
+        }
+      }); // console.log([{key, id, value, code }])
       // this.setState({
       //   value: arr[0]
       // })
@@ -64958,10 +64961,9 @@ function (_React$Component) {
           value: value,
           code: code,
           key: key,
-          text: text
+          title: title
         });
-      });
-      console.log(['select'].concat(arr));
+      }); // console.log(['select',...arr])
     }
   }, {
     key: "onChange",
@@ -65020,9 +65022,9 @@ function (_React$Component) {
       }, this.state.options.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_select__WEBPACK_IMPORTED_MODULE_4__["Option"], {
           value: item.code + ' ' + item.name,
-          text: item.name,
-          id: item.id,
-          code: item.code,
+          title: item.name,
+          id: item.id // ode={item.code}
+          ,
           key: item.id,
           disabled: item.disabled
         }, isCode ? item.code + ' ' + item.name : item.name);
@@ -65047,7 +65049,7 @@ ReferComponents.propTypes = {
   beforeSend: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   disabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   isCode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 ReferComponents.defaultProps = {
@@ -65065,7 +65067,7 @@ ReferComponents.defaultProps = {
   beforeSend: noop,
   onChange: noop,
   disabled: false,
-  value: [],
+  value: {},
   isCode: false
 };
 Object(react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__["polyfill"])(ReferComponents);
@@ -65195,8 +65197,7 @@ function (_React$Component) {
       var _this3 = this;
 
       var DocumentTreeData = this.props.DocumentTreeData; // let value = this.state.value
-
-      console.log(DocumentTreeData);
+      // console.log(DocumentTreeData)
 
       var loop = function loop(data) {
         // console.log(data)
@@ -65291,7 +65292,7 @@ function (_React$Component) {
           allowClear: true,
           treeDefaultExpandAll: true,
           onChange: _this3.onTreeSelectChange.bind(_this3, item, index)
-        }, loop(DocumentTreeData))));
+        }, loop(JSON.parse(JSON.stringify(DocumentTreeData))))));
       })));
     }
   }]);
