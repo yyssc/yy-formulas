@@ -65,8 +65,7 @@
     "rc-tree": "^1.15.2",
     "rc-tree-select": "^2.6.1",
     "react": "^16.8.4",
-    "react-lifecycles-compat": "^3.0.4",
-    "react-select": "^2.4.2"
+    "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
