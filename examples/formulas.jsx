@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Formulas} from '../src/index'
 import '../assets/index.less'
-import DocumentTreeData from './DocumentTreeData'
-import SubjectData from './SubjectData'
-import Description from './Description'
-import FunctionData from './FunctionData'
+import DocumentTreeData from './DocumentTreeData.json'
+import SubjectData from './SubjectData.json'
+import Description from './Description.json'
+import FunctionData from './FunctionData.json'
 class Demo extends React.Component {
   constructor(props) {
     super(props)

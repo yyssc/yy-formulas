@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Formulas} from '../src/index'
 import '../assets/index.less'
-import DocumentTreeData from './DocumentTreeData'
-import SubjectData from './SubjectData'
-import Description from './Description'
+import DocumentTreeData from './DocumentTreeData.json'
+import SubjectData from './SubjectData.json'
+import Description from './Description.json'
+import FunctionData from './FunctionData.json'
 class Demo extends React.Component {
   constructor(props) {
     super(props)
@@ -39,6 +40,7 @@ class Demo extends React.Component {
         onChange={this.onChange}
         textareaValue={this.state.textareaValue}
         DocumentTreeData={DocumentTreeData}
+        FunctionData={FunctionData}
         ReferDataUrl="http://172.20.4.220/ficloud/refbase_ctr/queryRefJSON"
         fixedData={{refCode:'entity',funcode:'conversion',disableshow: false}}
         SubjectData={SubjectData}
