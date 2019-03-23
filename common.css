@@ -1953,6 +1953,44 @@ li.rc-select-dropdown-menu-item-divider {
   padding: 15px;
   font-weight: bold;
 }
+.yy-formulas .function-warp {
+  border: 1px solid #ddd;
+}
+.yy-formulas .function-warp .function-left {
+  max-height: 300px;
+  overflow: auto;
+  border-right: 1px solid #ddd;
+  padding-right: 0;
+}
+.yy-formulas .function-warp .function-left .form-inline {
+  padding: 15px;
+}
+.yy-formulas .function-warp .function-right {
+  max-height: 300px;
+  overflow: auto;
+  border-left: 1px solid #ddd;
+  margin-left: -1px;
+  padding-left: 0;
+}
+.yy-formulas .function-warp .function-right .list-group {
+  margin: 0;
+  border: 0;
+}
+.yy-formulas .function-warp .function-right .list-group-item {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+.yy-formulas .function-warp .function-right .list-group-item:first-child {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+.yy-formulas .function-warp .function-right .list-group-item:last-child {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
 .rc-select-dropdown {
   max-height: 300px;
   overflow: auto;

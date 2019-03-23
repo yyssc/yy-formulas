@@ -56,7 +56,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/buttonlist": 0
+/******/ 		"examples/AuxiliaryFormulas": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -147,17 +147,17 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([1,"common"]);
+/******/ 	deferredModules.push([0,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/buttonlist.jsx":
-/*!*********************************!*\
-  !*** ./examples/buttonlist.jsx ***!
-  \*********************************/
+/***/ "./examples/AuxiliaryFormulas.jsx":
+/*!****************************************!*\
+  !*** ./examples/AuxiliaryFormulas.jsx ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -170,14 +170,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/index */ "./src/index.jsx");
 /* harmony import */ var _assets_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/index.less */ "./assets/index.less");
 /* harmony import */ var _assets_index_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_index_less__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _DocumentTreeData_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DocumentTreeData.json */ "./examples/DocumentTreeData.json");
-var _DocumentTreeData_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./DocumentTreeData.json */ "./examples/DocumentTreeData.json", 1);
-/* harmony import */ var _SubjectData_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SubjectData.json */ "./examples/SubjectData.json");
-var _SubjectData_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./SubjectData.json */ "./examples/SubjectData.json", 1);
-/* harmony import */ var _Description_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Description.json */ "./examples/Description.json");
-var _Description_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./Description.json */ "./examples/Description.json", 1);
-/* harmony import */ var _FunctionData_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FunctionData.json */ "./examples/FunctionData.json");
-var _FunctionData_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./FunctionData.json */ "./examples/FunctionData.json", 1);
+!(function webpackMissingModule() { var e = new Error("Cannot find module './DocumentTreeData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module './SubjectData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module './Description'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -202,7 +197,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Demo =
 /*#__PURE__*/
 function (_React$Component) {
@@ -217,90 +211,73 @@ function (_React$Component) {
     _this.state = {
       extareaValue: '11'
     };
-    _this.onCancel = _this.onCancel.bind(_assertThisInitialized(_this));
-    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
-    _this.onValidate = _this.onValidate.bind(_assertThisInitialized(_this));
-    _this.onZiDingYi = _this.onZiDingYi.bind(_assertThisInitialized(_this));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.itemChange = _this.itemChange.bind(_assertThisInitialized(_this)); // console.log(Button)
+
     return _this;
   }
 
   _createClass(Demo, [{
-    key: "onCancel",
-    value: function onCancel(value) {
-      console.log(['onCancel', value]);
+    key: "componentDidMount",
+    value: function componentDidMount() {} // setInterval(()=>{
+    //   this.setState({textareaValue: '十秒钟后value变化：'+Math.random()})
+    // },10000)
+
+    /**
+      text值变化的时候会调用 onChange方法
+      多数不用此方法，只要坚挺 onSubmit 方法返回的值
+    */
+
+  }, {
+    key: "onChange",
+    value: function onChange(value) {
+      console.log(value);
     }
   }, {
-    key: "onSubmit",
-    value: function onSubmit(value) {
-      console.log(['onSubmit', value]);
-    }
-  }, {
-    key: "onValidate",
-    value: function onValidate(value) {
-      console.log(['onValidate', value]);
-    }
-  }, {
-    key: "onZiDingYi",
-    value: function onZiDingYi(value) {
-      console.log(['onZiDingYi', value]);
+    key: "itemChange",
+    value: function itemChange(value) {
+      this.itemChange(value);
+      console.log(value);
     }
   }, {
     key: "render",
     value: function render() {
+      // console.log(DocumentTreeData)
+      // var sg = 'dd'
+      // return (<div>222</div>)
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["Formulas"], {
         onChange: this.onChange,
         textareaValue: this.state.textareaValue,
-        DocumentTreeData: _DocumentTreeData_json__WEBPACK_IMPORTED_MODULE_4__,
-        FunctionData: _FunctionData_json__WEBPACK_IMPORTED_MODULE_7__,
+        DocumentTreeData: !(function webpackMissingModule() { var e = new Error("Cannot find module './DocumentTreeData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
         ReferDataUrl: "http://172.20.4.220/ficloud/refbase_ctr/queryRefJSON",
         fixedData: {
           refCode: 'entity',
           funcode: 'conversion',
           disableshow: false
         },
-        SubjectData: _SubjectData_json__WEBPACK_IMPORTED_MODULE_5__,
-        Description: _Description_json__WEBPACK_IMPORTED_MODULE_6__,
-        onCancel: this.onCancel,
-        onSubmit: this.onSubmit,
-        onValidate: this.onValidate,
-        onZiDingYi: this.onZiDingYi,
-        buttonList: [{
-          name: '确定',
-          className: 'btn btn-default',
-          event: 'onSubmit'
-        },
-        /*默认 事件可以自定义*/
-        {
-          name: '取消',
-          className: 'btn btn-default',
-          event: 'onCancel'
-        },
-        /*默认 事件可以自定义*/
-        {
-          name: '验证',
-          className: 'btn btn-default',
-          event: 'onValidate'
-        },
-        /*默认 事件可以自定义*/
-        {
-          name: '全选',
-          className: 'btn btn-default',
-          event: 'onValueSelected'
-        },
-        /*默认 内部事件*/
-        {
-          name: '清空',
-          className: 'btn btn-default',
-          event: 'onClear'
-        },
-        /*默认 内部事件*/
-        {
-          name: '自己定义',
-          className: 'btn btn-default',
-          event: 'onZiDingYi'
-          /*自定义 事件自定义*/
-
-        }]
+        SubjectData: !(function webpackMissingModule() { var e = new Error("Cannot find module './SubjectData'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+        Description: !(function webpackMissingModule() { var e = new Error("Cannot find module './Description'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+        tabs: [{
+          id: 3,
+          name: '辅助核算类型',
+          type: 'sys',
+          component: 'Auxiliary',
+          disabled: false,
+          placeholder: '请输入...',
+          notFoundContent: '暂无数据',
+          showName: '辅助核算类型',
+          onChange: this.itemChange
+        }, {
+          id: 4,
+          name: '辅助核算值',
+          type: 'sys',
+          component: 'Auxiliary',
+          disabled: false,
+          placeholder: '请输入...',
+          notFoundContent: '暂无数据',
+          showName: '辅助核算值'
+        }],
+        activeKey: "0"
       });
     }
   }]);
@@ -312,17 +289,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 1:
-/*!***************************************!*\
-  !*** multi ./examples/buttonlist.jsx ***!
-  \***************************************/
+/***/ 0:
+/*!**********************************************!*\
+  !*** multi ./examples/AuxiliaryFormulas.jsx ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/buttonlist.jsx */"./examples/buttonlist.jsx");
+module.exports = __webpack_require__(/*! ./examples/AuxiliaryFormulas.jsx */"./examples/AuxiliaryFormulas.jsx");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=buttonlist.js.map
+//# sourceMappingURL=AuxiliaryFormulas.js.map
