@@ -55,6 +55,46 @@ body{
 		padding: 15px;
 		font-weight: bold;
 	}
+	
+	.function-warp{
+		border: 1px solid #ddd;
+		.function-left{
+			max-height: 300px;
+			overflow: auto;
+			border-right:1px solid #ddd;
+			padding-right:0;
+			.form-inline{
+				padding: 15px;
+			}
+		}
+		.function-right{
+			max-height: 300px;
+			overflow: auto;
+			border-left:1px solid #ddd;
+			margin-left: -1px;
+			padding-left: 0;
+			.list-group{
+				margin: 0;
+				border: 0;
+			}
+			.list-group-item{
+				border: 0;
+				border-bottom: 1px solid #ddd;
+				margin: 0;
+			}
+			.list-group-item:first-child{
+				border-radius: 0;
+				border: 0;
+				border-bottom: 1px solid #ddd;
+			}
+			.list-group-item:last-child{
+				border-radius: 0;
+				border: 0;
+				border-bottom: 1px solid #ddd;
+			}
+		}
+	}
+	
 }
 .rc-select-dropdown{
 	max-height: 300px;

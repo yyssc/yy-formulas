@@ -116,7 +116,7 @@ class Formulas extends React.Component {
   }
 
   render() {
-    let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData } = this.props
+    let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData, FunctionData } = this.props
     return (
       <div className={prefixCls}>
         <div className="row">
@@ -154,6 +154,7 @@ class Formulas extends React.Component {
             fixedData={fixedData}
             SubjectData={SubjectData}
             onDesc={this.onDesc}
+            FunctionData={FunctionData}
           />
         </div>
         <p className="formulas-desc">{this.state.textDescription}</p>
@@ -179,7 +180,8 @@ Formulas.propTypes = {
   DocumentTreeData: PropTypes.array,
   ReferDataUrl: PropTypes.string,
   fixedData: PropTypes.object,
-  Description: PropTypes.object
+  Description: PropTypes.object,
+  FunctionData: PropTypes.array
 }
 
 Formulas.defaultProps = {
@@ -199,15 +201,19 @@ Formulas.defaultProps = {
   onValidate: noop,
   tabsPrefixCls: 'rc-tabs',
   tabs: [
-    {id:10, name: '单据字段', type: 'sys', component: 'Document', disabled: false},
-    {id:11, name: '固定值', type: 'sys', component: 'Fixed', disabled: false},
-    {id:12, name: '科目转换', type: 'sys', component: 'Subject', disabled: false}
+    {id:0, name: '单据字段', type: 'sys', component: 'Document', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'},
+    {id:1, name: '固定值', type: 'sys', component: 'Fixed', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName1: '档案', showName2: '档案值'},
+    {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定'},
+    {id:3, name: '辅助核算类型', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算类型',onChange: noop},
+    {id:4, name: '辅助核算值', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算值'},
+    {id:5, name: '函数', type: 'sys', component: 'Function', disabled: false, notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'}
   ],
-  activeKey: '10',
+  activeKey: '0',
   DocumentTreeData: [],
   ReferDataUrl: '',
   fixedData: {},
-  Description: {}
+  Description: {},
+  FunctionData: []
 }
 
 polyfill(Formulas)

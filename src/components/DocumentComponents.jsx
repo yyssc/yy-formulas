@@ -126,7 +126,7 @@ class DocumentComponents extends React.Component {
     return (
       <div className="yy-tab-content">
         <form className="form-inline">
-          <span>定位：</span>
+          <span>{this.props.item.positionName}{/*定位：*/}</span>
           <div className="form-group">
             <input
               className="form-control"
@@ -140,7 +140,7 @@ class DocumentComponents extends React.Component {
             onClick={this.onButClick}
             type="button"
           >
-            确定
+            {this.props.item.okName}{/*确定*/}
           </button>
         </form>
         <Tree
@@ -157,7 +157,6 @@ class DocumentComponents extends React.Component {
           {this.loop(DocumentTreeData)}
         </Tree>
       </div>
-      // <div>{JSON.stringify(this.props.item)}单据字段单据字段单据字段单据字段单据字段</div>
     )
   }
 }

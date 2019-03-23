@@ -1,0 +1,27 @@
+[
+  { "name": "常用",
+    "code":"common",
+    "formulas":[
+      {"code":"IF","value":"iif($1, $2, $3)"},
+      {"code":"DATEFORMAT","value":"dateformat($1, $2, $3)"}
+    ]
+  },
+  { "name":"数学",
+    "code":"math",
+    "formulas":[
+      {"code":"SUM","value":"sum($1, $2)"},
+      {"code":"MAX","value":"max($1, $2)"},
+      {"code":"MIN","value":"min($1, $2)"},
+      {"code":"ABS","value":"abs($1)"},
+      {"code":"MOD","value":"mod($1, $2)"},
+      {"code":"ROUND","value":"round($1)"}
+    ]
+  },
+  { "name":"财务",
+    "code":"fi",
+    "formulas":[
+      {"code":"GETACCSUBJECT","value":"getaccsubject($1, $2)"},
+      {"code":"GETACCTRUSTRELATIONSHIP","value":"getacctrustrelationship($1, $2, $3)"}
+    ]
+  }
+]

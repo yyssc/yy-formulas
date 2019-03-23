@@ -38,18 +38,20 @@ class FixedComponents extends React.Component {
       <div className="yy-tab-content">
         <form className="form-horizontal">
           <div className="form-group">
-            <label className="col-sm-2 control-label">档案</label>
+            <label className="col-sm-2 control-label">{this.props.item.showName1}{/*档案*/}</label>
             <div className="col-sm-10">
               <ReferComponents
                 url={ReferDataUrl}
                 fixedData={fixedData}
                 value={this.state.record}
+                placeholder={this.props.item.placeholder}
+                notFoundContent={this.props.item.notFoundContent}
                 onChange={this.onChange.bind(this,'record')}
               />
             </div>
           </div>
           <div className="form-group">
-            <label className="col-sm-2 control-label">档案值</label>
+            <label className="col-sm-2 control-label">{this.props.item.showName2}{/*档案值*/}</label>
             <div className="col-sm-10">
               {this.state.record.code === 'accsubject' ? (
                 <div>
@@ -59,6 +61,8 @@ class FixedComponents extends React.Component {
                     fixedData={Object.assign({},fixedData,{refCode: 'accsubjectchart',refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
                     disabled={!this.state.record.code}
                     value={this.state.record2}
+                    placeholder={this.props.item.placeholder}
+                    notFoundContent={this.props.item.notFoundContent}
                     onChange={this.onChange.bind(this,'record2')}
                   />
                   <ReferComponents
@@ -67,6 +71,8 @@ class FixedComponents extends React.Component {
                     fixedData={Object.assign({},fixedData,{refCode: this.state.record.code,filterCondition: '{"accsubjectchart":"'+this.state.record2.id+'"}',refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
                     disabled={!this.state.record2.code}
                     value={this.state.recordValue}
+                    placeholder={this.props.item.placeholder}
+                    notFoundContent={this.props.item.notFoundContent}
                     onChange={this.onChange.bind(this,'recordValue')}
                   />
                 </div>
@@ -76,6 +82,8 @@ class FixedComponents extends React.Component {
                   fixedData={Object.assign({},fixedData,{refCode:this.state.record.code})}
                   disabled={!this.state.record.code}
                   value={this.state.recordValue}
+                  placeholder={this.props.item.placeholder}
+                  notFoundContent={this.props.item.notFoundContent}
                   onChange={this.onChange.bind(this,'recordValue')}
                 />
               )}

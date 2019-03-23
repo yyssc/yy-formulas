@@ -7,6 +7,8 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar'
 import DocumentComponents from './DocumentComponents'
 import FixedComponents from './FixedComponents'
 import SubjectComponents from './SubjectComponents'
+import AuxiliaryComponents from './AuxiliaryComponents'
+import FunctionComponents from './FunctionComponents'
 
 class TabsComponents extends React.Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class TabsComponents extends React.Component {
   }
 
   render() {
-    let { prefixCls, tabs, DocumentTreeData, ReferDataUrl, fixedData, SubjectData,onDesc } =  this.props
+    let { prefixCls, tabs, DocumentTreeData, ReferDataUrl, fixedData, SubjectData,onDesc, FunctionData } =  this.props
     // console.log(this.props)
     return (
       <Tabs
@@ -47,18 +49,22 @@ class TabsComponents extends React.Component {
             onInsertValue: this.props.onInsertValue,
             ReferDataUrl,
             fixedData,
-            onDesc
+            onDesc,
+            DocumentTreeData,
+            SubjectData,
+            FunctionData
           }
           if(typeof item.component==='string'){
             if(item.component==='Document'){
               Component = DocumentComponents
-              props['DocumentTreeData'] = DocumentTreeData
             } else if(item.component==='Fixed'){
               Component = FixedComponents
             } else if(item.component==='Subject'){
-              props['DocumentTreeData'] = DocumentTreeData
-              props['SubjectData'] = SubjectData
               Component = SubjectComponents
+            } else if(item.component === 'Auxiliary') {
+              Component = AuxiliaryComponents
+            } else if (item.component === 'Function') {
+              Component = FunctionComponents
             }
           }
           return (

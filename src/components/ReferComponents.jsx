@@ -128,7 +128,9 @@ class ReferComponents extends React.Component {
         disabled={disabled}
         onFocus={this.onFocus}
         // onSearch={this.onSearch}
-        notFoundContent="暂无数据"
+        placeholder={this.props.placeholder}
+        notFoundContent={this.props.notFoundContent}
+        // notFoundContent="暂无数据"
         onChange={this.onChange}
         onSelect={this.onSelect}
         value={this.state.value}
@@ -165,7 +167,9 @@ ReferComponents.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   value: PropTypes.object,
-  isCode: PropTypes.bool
+  isCode: PropTypes.bool,
+  placeholder: PropTypes.string,
+  notFoundContent: PropTypes.string
 }
 
 ReferComponents.defaultProps = {
@@ -184,7 +188,9 @@ ReferComponents.defaultProps = {
   onChange: noop,
   disabled: false,
   value: {},
-  isCode: false
+  isCode: false,
+  placeholder: '请输入...',
+  notFoundContent: '暂无数据'
 }
 
 polyfill(ReferComponents)

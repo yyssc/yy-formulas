@@ -9,6 +9,7 @@ class SubjectComponents extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.onClick = this.onClick.bind(this)
     this.onTreeSelectChange = this.onTreeSelectChange.bind(this)
+    this.onButClick = this.onButClick.bind(this)
     this.state = {
       activeItem: null,
       activeKey: '',
@@ -55,6 +56,49 @@ class SubjectComponents extends React.Component {
         this.props.onInsertValue(str)
         this.props.onDesc('cmapping')
       }
+    })
+  }
+
+  onButClick(){
+    if(!this.state.value) return false
+    let activeKey = this.state.activeKey
+    if(!this.state.value) return false
+    let searchIndex = []
+    this.props.SubjectData.forEach((item)=>{
+      let regexp = new RegExp(this.state.value,'igm')
+      if(regexp.test(item.code+''+item.name)){
+        searchIndex.push(item.id)
+      }
+    })
+    if(searchIndex.length===0) return false
+    let index2 = searchIndex.indexOf(this.state.activeKey)
+    if(index2==-1){
+      activeKey=searchIndex[0]
+    }else{
+      if(searchIndex[index2+1]){
+        activeKey=searchIndex[index2+1]
+      }else{
+        activeKey=searchIndex[0]
+      }
+    }
+    let treeList = []
+    let activeItem = null
+    this.props.SubjectData.forEach((item)=>{
+      if(item.id==activeKey){
+        activeItem = item
+        Object.keys(item).forEach((key)=>{
+          let regexp = new RegExp('^classtype','igm')
+          if(regexp.test(key) && item[key]){
+            treeList.push(item[key])
+          }
+        })
+      }
+    })
+
+    this.setState({
+      activeKey,
+      treeList,
+      activeItem
     })
   }
 
@@ -105,7 +149,7 @@ class SubjectComponents extends React.Component {
     return (
       <div className="yy-tab-content">
         <form className="form-inline">
-          <span>定位：</span>
+          <span>{this.props.item.positionName}{/*定位：*/}</span>
           <div className="form-group">
             <input
               className="form-control"
@@ -113,23 +157,31 @@ class SubjectComponents extends React.Component {
               value={this.state.value}
             />
           </div>
+          <button
+            style={{marginLeft: '10px'}}
+            className="btn btn-default"
+            onClick={this.onButClick}
+            type="button"
+          >
+            {this.props.item.okName}{/*确定*/}
+          </button>
         </form>
         <div>
           <ul className="nav nav-pills nav-stacked">
             {this.props.SubjectData.map((item)=>{
-              let flag = false
-              if(this.state.value && this.state.value.length > 0){
-                let regexp = new RegExp(this.state.value,'igm')
-                if(regexp.test(item.code+''+item.name)){
-                  flag=true
-                }
-              }
-              let className = this.state.activeKey == item.id ? 'active' : ''
-              className = className + (flag ? ' subject-search' : '')
+              // let flag = false
+              // if(this.state.value && this.state.value.length > 0){
+              //   let regexp = new RegExp(this.state.value,'igm')
+              //   if(regexp.test(item.code+''+item.name)){
+              //     flag=true
+              //   }
+              // }
+              // let className = this.state.activeKey == item.id ? 'active' : ''
+              // className = className + (flag ? ' subject-search' : '')
               return (
                 <li
                   onClick={this.onClick.bind(this,item)}
-                  className={className}
+                  className={this.state.activeKey == item.id ? 'active' : ''}
                   key={item.id}
                 >
                   <a href="javascript:void(0)">{item.code} / {item.name}</a>
@@ -154,8 +206,8 @@ class SubjectComponents extends React.Component {
                     style={{width:'100%'}}
                     value={item.value}
                     dropdownStyle={{ maxHeight: 300, overflow: 'auto' }}
-                    placeholder="请输入..."
-                    notFoundContent="暂无数据"
+                    placeholder={this.props.item.placeholder} // "请输入..."
+                    notFoundContent={this.props.item.notFoundContent} // "暂无数据"
                     allowClear
                     treeDefaultExpandAll
                     onChange={this.onTreeSelectChange.bind(this,item,index)}
