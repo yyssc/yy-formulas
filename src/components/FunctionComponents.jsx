@@ -113,7 +113,7 @@ class FunctionComponents extends React.Component {
                       onClick={this.onClick.bind(this,'small',item)}
                       onDoubleClick={this.onDoubleClick.bind(this,item)}
                     >
-                      <a href="javascript:void(0)">{item.value}</a>
+                      <a href="javascript:void(0)">{item.code}</a>
                     </li>
                   )
                 })}
