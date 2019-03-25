@@ -1,0 +1,117 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+
+/* eslint-disable */
+class Demo extends React.Component {
+  constructor(props,...arr) {
+    super(props)
+    this.state = {
+      name: this.props.name ? 'name' : this.props.name
+    }
+    // 使用场景：初始化局部State或把方法的句柄绑定到实例
+    // 注意：第一个语句必须是super（props）
+    console.log(['constructor',arr])
+  }
+
+  getDerivedStateFromProps(props,state,...arr){
+    // 内部state变化依赖于props时
+    console.log(['getDerivedStateFromProps',props,state,arr])
+  }
+
+  componentWillMount(...arr){
+    // 遗留函数，在16.3以后不应该再使用。
+    console.log(['componentWillMount',arr])
+  }
+
+  componentDidMount(...arr){
+    // 真是DOM被更新之后调用
+    // 在创建组件周期，该函数是异步请求的最佳接口，用以加载数据，AJAX/Fetch/redux-dispatch
+    console.log(['componentDidMount',arr])
+    setTimeout(()=>{
+      this.setState({
+        name: Math.random()
+      })
+    },3000)
+  }
+
+  componentWillReceiveProps(nextProps,...arr){
+    // 遗留函数，在16.3以后不应该再使用。
+    console.log(['componentWillReceiveProps',nextProps,arr])
+  }
+
+  shouldComponentUpdate(nextProps, nextState,...arr) {
+    // 性能优化接口
+    // 通过比较this.props与nextProps， 和比较this.state 与 nextState 来返回false阻止组件render
+    // forceUpdate不会触发该函数
+    console.log(['shouldComponentUpdate',nextProps, nextState,arr])
+    return true
+  }
+
+  componentWillUpdate(nextProps, nextState,...arr){
+    // 使用场景：遗留函数，在16.3以后不应该再使用
+    // 注意：不能在该函数中通过this.setstate再次改变state，如果需要，则在componentWillReceiveProps函数中改变
+    console.log(['componentWillUpdate',nextProps, nextState,arr])
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState,...arr){
+    console.log(['getSnapshotBeforeUpdate',prevProps, prevState,arr])
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot,...arr){
+    // 通过比较prevProps或prevState 与 this.props或this.state，进行业务处理，发送网络请求
+    // 在处理业务或发送网络请求时，一定要做条件比较，否则容易造成死循环
+    console.log(['componentDidUpdate',prevProps, prevState, snapshot,arr])
+  }
+
+  componentDidCatch(...arr){
+    // 任何子组件的JS错误或异常发生时触发初始化周期和运行时周期的错误都会触发该函数
+    // 注意：只捕获该组件的所有子组件异常，并不会捕获本身的异常在该函数中调用setState以实现错误回滚至前一页面不要使用该函数作为业务处理的一部分。
+    console.log(['componentDidCatch',arr])
+  }
+
+  componentWillUnmount(...arr){
+    // 组件销毁时调用
+    console.log(['componentWillUnmount',arr])
+  }
+
+
+  render(...arr) {
+    console.log(['render',arr])
+    return (
+      <div>{this.props.name}{this.state.name}</div>
+    )
+  }
+}
+
+Demo.propTypes = {
+  name : PropTypes.string
+}
+Demo.defaultProps = {
+  name : '11'
+}
+/* eslint-disable */
+class Test extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name: 'props Name'
+    }
+  }
+
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({
+        name: 'props' + Math.random()
+      })
+    },6000)
+  }
+
+  render() {
+    return (
+      <Demo name={this.state.name} />
+    )
+  }
+}
+
+ReactDOM.render(<Test />, document.getElementById('__react-content'))

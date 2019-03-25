@@ -65205,7 +65205,7 @@ function (_React$Component) {
           onDoubleClick: _this3.onDoubleClick.bind(_this3, item)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "javascript:void(0)"
-        }, item.value));
+        }, item.code));
       }))))));
     }
   }]);
