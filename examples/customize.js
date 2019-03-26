@@ -56,7 +56,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/AuxiliaryFormulas": 0
+/******/ 		"examples/customize": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -147,17 +147,127 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([0,"common"]);
+/******/ 	deferredModules.push([2,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/AuxiliaryFormulas.jsx":
-/*!****************************************!*\
-  !*** ./examples/AuxiliaryFormulas.jsx ***!
-  \****************************************/
+/***/ "./examples/CustomComponents.js":
+/*!**************************************!*\
+  !*** ./examples/CustomComponents.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-lifecycles-compat */ "./node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var CustomComponents =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CustomComponents, _React$Component);
+
+  function CustomComponents(props) {
+    var _this;
+
+    _classCallCheck(this, CustomComponents);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomComponents).call(this, props));
+    _this.onClick = _this.onClick.bind(_assertThisInitialized(_this));
+    _this.onClear = _this.onClear.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CustomComponents, [{
+    key: "onClick",
+    value: function onClick() {
+      this.props.onInsertValue('插入文本框:' + Math.random());
+      this.props.onDesc('ZEROIFNULL'); // 设置说明 在this.props.Description
+    }
+  }, {
+    key: "onClear",
+    value: function onClear() {
+      this.props.onClear();
+      this.props.onDesc();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      console.log(this.props);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "yy-tab-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "CustomComponents"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-4 col-sm-4 col-md-4 col-lg-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-default",
+        onClick: this.onClick,
+        type: "button"
+      }, "\u63D2\u5165\u503C\u548C\u663E\u793A\u8BF4\u660E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-default",
+        onClick: this.onClear,
+        type: "button"
+      }, "\u6E05\u695A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, this.props.item.dataList.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-8 col-sm-8 col-md-8 col-lg-8"
+      }, JSON.stringify(this.props.item.dataList.data))));
+    }
+  }]);
+
+  return CustomComponents;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var noop = function noop() {
+  return null;
+};
+
+CustomComponents.propTypes = {
+  item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  onDesc: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onInsertValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onClear: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+CustomComponents.defaultProps = {
+  item: {},
+  onDesc: noop,
+  DocumentTreeData: noop,
+  onClear: noop
+};
+Object(react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__["polyfill"])(CustomComponents);
+/* harmony default export */ __webpack_exports__["default"] = (CustomComponents);
+
+/***/ }),
+
+/***/ "./examples/customize.jsx":
+/*!********************************!*\
+  !*** ./examples/customize.jsx ***!
+  \********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -178,6 +288,7 @@ var _SubjectData_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__we
 var _Description_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./Description.json */ "./examples/Description.json", 1);
 /* harmony import */ var _FunctionData_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FunctionData.json */ "./examples/FunctionData.json");
 var _FunctionData_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./FunctionData.json */ "./examples/FunctionData.json", 1);
+/* harmony import */ var _CustomComponents__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CustomComponents */ "./examples/CustomComponents.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -203,6 +314,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Demo =
 /*#__PURE__*/
 function (_React$Component) {
@@ -217,8 +329,7 @@ function (_React$Component) {
     _this.state = {
       extareaValue: '11'
     };
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
-    _this.itemChange = _this.itemChange.bind(_assertThisInitialized(_this)); // console.log(Button)
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this)); // console.log(Button)
 
     return _this;
   }
@@ -240,12 +351,6 @@ function (_React$Component) {
       console.log(value);
     }
   }, {
-    key: "itemChange",
-    value: function itemChange(value, str) {
-      // this.itemChange(value)
-      console.log(value, str);
-    }
-  }, {
     key: "render",
     value: function render() {
       // console.log(DocumentTreeData)
@@ -265,26 +370,28 @@ function (_React$Component) {
         Description: _Description_json__WEBPACK_IMPORTED_MODULE_6__,
         FunctionData: _FunctionData_json__WEBPACK_IMPORTED_MODULE_7__,
         tabs: [{
-          id: 3,
-          name: '辅助核算类型',
-          type: 'sys',
-          component: 'Auxiliary',
+          id: 6,
+          name: '函数',
+          type: 'custom',
+          component: _CustomComponents__WEBPACK_IMPORTED_MODULE_8__["default"],
           disabled: false,
-          placeholder: '请输入...',
           notFoundContent: '暂无数据',
-          showName: '辅助核算类型',
-          onChange: this.itemChange()
-        }, {
-          id: 4,
-          name: '辅助核算值',
-          type: 'sys',
-          component: 'Auxiliary',
-          disabled: false,
-          placeholder: '请输入...',
-          notFoundContent: '暂无数据',
-          showName: '辅助核算值'
+          positionName: '定位:',
+          okName: '确定',
+          dataList: {
+            name: '我自己在组件里需要的数据，访问方式是this.props.item.dataList.name',
+            data: [{
+              id: 1,
+              code: 1,
+              name: 1
+            }, {
+              id: 2,
+              code: 2,
+              name: 2
+            }]
+          }
         }],
-        activeKey: "0"
+        activeKey: "6"
       });
     }
   }]);
@@ -296,17 +403,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 0:
-/*!**********************************************!*\
-  !*** multi ./examples/AuxiliaryFormulas.jsx ***!
-  \**********************************************/
+/***/ 2:
+/*!**************************************!*\
+  !*** multi ./examples/customize.jsx ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/AuxiliaryFormulas.jsx */"./examples/AuxiliaryFormulas.jsx");
+module.exports = __webpack_require__(/*! ./examples/customize.jsx */"./examples/customize.jsx");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=AuxiliaryFormulas.js.map
+//# sourceMappingURL=customize.js.map

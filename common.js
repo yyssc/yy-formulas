@@ -64330,7 +64330,8 @@ function (_React$Component) {
           ReferDataUrl = _this$props.ReferDataUrl,
           fixedData = _this$props.fixedData,
           SubjectData = _this$props.SubjectData,
-          FunctionData = _this$props.FunctionData;
+          FunctionData = _this$props.FunctionData,
+          Description = _this$props.Description;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: prefixCls
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -64365,7 +64366,9 @@ function (_React$Component) {
         fixedData: fixedData,
         SubjectData: SubjectData,
         onDesc: this.onDesc,
-        FunctionData: FunctionData
+        FunctionData: FunctionData,
+        Description: Description,
+        onClear: this.onClear
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "formulas-desc"
       }, this.state.textDescription));
@@ -65884,7 +65887,9 @@ function (_React$Component) {
           fixedData = _this$props.fixedData,
           SubjectData = _this$props.SubjectData,
           onDesc = _this$props.onDesc,
-          FunctionData = _this$props.FunctionData; // console.log(this.props)
+          FunctionData = _this$props.FunctionData,
+          Description = _this$props.Description,
+          onClear = _this$props.onClear; // console.log(this.props)
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tabs__WEBPACK_IMPORTED_MODULE_3__["default"], {
         prefixCls: prefixCls,
@@ -65906,7 +65911,9 @@ function (_React$Component) {
           onDesc: onDesc,
           DocumentTreeData: DocumentTreeData,
           SubjectData: SubjectData,
-          FunctionData: FunctionData
+          FunctionData: FunctionData,
+          Description: Description,
+          onClear: onClear
         };
 
         if (typeof item.component === 'string') {

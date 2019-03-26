@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>AuxiliaryFormulas.js - example - yy-formulas@1.0.6</title>
+  <title>AuxiliaryFormulas.js - example - yy-formulas@1.0.7</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>yy-formulas@1.0.6</h1>
+      <h1>yy-formulas@1.0.7</h1>
 
       <p>yy formulas fc</p>
     </div>
@@ -273,9 +273,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>
 <span class="hljs-keyword">import</span> {Formulas} <span class="hljs-keyword">from</span> <span class="hljs-string">'../src/index'</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">'../assets/index.less'</span>
-<span class="hljs-keyword">import</span> DocumentTreeData <span class="hljs-keyword">from</span> <span class="hljs-string">'./DocumentTreeData'</span>
-<span class="hljs-keyword">import</span> SubjectData <span class="hljs-keyword">from</span> <span class="hljs-string">'./SubjectData'</span>
-<span class="hljs-keyword">import</span> Description <span class="hljs-keyword">from</span> <span class="hljs-string">'./Description'</span>
+<span class="hljs-keyword">import</span> DocumentTreeData <span class="hljs-keyword">from</span> <span class="hljs-string">'./DocumentTreeData.json'</span>
+<span class="hljs-keyword">import</span> SubjectData <span class="hljs-keyword">from</span> <span class="hljs-string">'./SubjectData.json'</span>
+<span class="hljs-keyword">import</span> Description <span class="hljs-keyword">from</span> <span class="hljs-string">'./Description.json'</span>
+<span class="hljs-keyword">import</span> FunctionData <span class="hljs-keyword">from</span> <span class="hljs-string">'./FunctionData.json'</span>
 class Demo extends React.Component {
   constructor(props) {
     super(props)
@@ -300,9 +301,9 @@ class Demo extends React.Component {
     console.log(value)
   }
 
-  itemChange(value){
-    this.itemChange(value)
-    console.log(value)
+  itemChange(value, str){
+    // this.itemChange(value)
+    console.log(value, str)
   }
 
   render() {
@@ -318,8 +319,9 @@ class Demo extends React.Component {
         fixedData={{refCode:<span class="hljs-string">'entity'</span>,funcode:<span class="hljs-string">'conversion'</span>,disableshow: false}}
         SubjectData={SubjectData}
         Description={Description}
+        FunctionData={FunctionData}
         tabs={[
-          {id:3, name: <span class="hljs-string">'辅助核算类型'</span>, type: <span class="hljs-string">'sys'</span>, component: <span class="hljs-string">'Auxiliary'</span>, disabled: false, placeholder: <span class="hljs-string">'请输入...'</span>, notFoundContent: <span class="hljs-string">'暂无数据'</span>, showName: <span class="hljs-string">'辅助核算类型'</span>,onChange: this.itemChange},
+          {id:3, name: <span class="hljs-string">'辅助核算类型'</span>, type: <span class="hljs-string">'sys'</span>, component: <span class="hljs-string">'Auxiliary'</span>, disabled: false, placeholder: <span class="hljs-string">'请输入...'</span>, notFoundContent: <span class="hljs-string">'暂无数据'</span>, showName: <span class="hljs-string">'辅助核算类型'</span>,onChange: this.itemChange()},
           {id:4, name: <span class="hljs-string">'辅助核算值'</span>, type: <span class="hljs-string">'sys'</span>, component: <span class="hljs-string">'Auxiliary'</span>, disabled: false, placeholder: <span class="hljs-string">'请输入...'</span>, notFoundContent: <span class="hljs-string">'暂无数据'</span>, showName: <span class="hljs-string">'辅助核算值'</span>}
         ]}
         activeKey=<span class="hljs-string">"0"</span>
