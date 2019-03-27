@@ -40,7 +40,7 @@ module.exports = [{"parentKey":null,"title":"应付单","key":"root0","isLeaf":f
 /*! exports provided: 0, 1, 2, default */
 /***/ (function(module) {
 
-module.exports = [{"name":"常用","code":"common","formulas":[{"code":"IF","value":"iif($1, $2, $3)"},{"code":"DATEFORMAT","value":"dateformat($1, $2, $3)"}]},{"name":"数学","code":"math","formulas":[{"code":"SUM","value":"sum($1, $2)"},{"code":"MAX","value":"max($1, $2)"},{"code":"MIN","value":"min($1, $2)"},{"code":"ABS","value":"abs($1)"},{"code":"MOD","value":"mod($1, $2)"},{"code":"ROUND","value":"round($1)"}]},{"name":"财务","code":"fi","formulas":[{"code":"GETACCSUBJECT","value":"getaccsubject($1, $2)"},{"code":"GETACCTRUSTRELATIONSHIP","value":"getacctrustrelationship($1, $2, $3)"}]}];
+module.exports = [{"code":"common","formulas":[{"id":"G001ZM0000FORMULA0000000001","tenantid":"a65xtqwz","srctplid":null,"code":"IF","showvalue":"iif(, , )"},{"id":"G001ZM0000FORMULA0000000002","tenantid":"a65xtqwz","srctplid":null,"code":"DATEFORMAT","showvalue":"dateformat(, , )"},{"id":"G001ZM0000FORMULA0000000011","tenantid":"a65xtqwz","srctplid":null,"code":"GETID","showvalue":"getid(,,)"}],"name":"常用"},{"code":"math","formulas":[{"id":"G001ZM0000FORMULA0000000003","tenantid":"a65xtqwz","srctplid":null,"code":"SUM","showvalue":"sum(, )"},{"id":"G001ZM0000FORMULA0000000004","tenantid":"a65xtqwz","srctplid":null,"code":"MAX","showvalue":"max(, )"},{"id":"G001ZM0000FORMULA0000000005","tenantid":"a65xtqwz","srctplid":null,"code":"MIN","showvalue":"min(, )"},{"id":"G001ZM0000FORMULA0000000006","tenantid":"a65xtqwz","srctplid":null,"code":"ABS","showvalue":"abs()"},{"id":"G001ZM0000FORMULA0000000007","tenantid":"a65xtqwz","srctplid":null,"code":"MOD","showvalue":"mod(, )"},{"id":"G001ZM0000FORMULA0000000008","tenantid":"a65xtqwz","srctplid":null,"code":"ROUND","showvalue":"round(,)"}],"name":"数学"},{"code":"fi","formulas":[{"id":"G001ZM0000FORMULA0000000009","tenantid":"a65xtqwz","srctplid":null,"code":"GETACCSUBJECT","showvalue":"getaccsubject(, )"},{"id":"G001ZM0000FORMULA0000000010","tenantid":"a65xtqwz","srctplid":null,"code":"GETACCTRUSTRELATIONSHIP","showvalue":"getacctrustrelationship(, , )"}],"name":"财务"}];
 
 /***/ }),
 
@@ -65118,7 +65118,7 @@ function (_React$Component) {
   }, {
     key: "onDoubleClick",
     value: function onDoubleClick(item) {
-      this.props.onInsertValue(' ' + item.value + ' ');
+      this.props.onInsertValue(' ' + item.showvalue + ' ');
       this.props.onDesc(item.code);
     }
   }, {
