@@ -11,7 +11,7 @@ files.forEach((file)=>{
   let name = path.basename(file, ext)
   if(ext=='.jsx'){
     if(!fs.existsSync(path.resolve(__dirname, "examples")+`/${name}.html`)){
-      console.log([path.resolve(__dirname, '/')+'index.html'])
+      // console.log([path.resolve(__dirname, '/')+'index.html'])
       fs.copyFileSync('./index.html',path.resolve(__dirname, "examples")+`/${name}.html`)
     }
     entry[name]=`./examples/${file}`;
@@ -120,8 +120,8 @@ module.exports = {
     contentBase: path.join(__dirname, "dist/"),
     compress: true,
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
-      https: false, // true for self-signed, object for cert authority
-      noInfo: true,
+    https: false, // true for self-signed, object for cert authority
+    noInfo: true,
     port: 9000,
     open: true,
     overlay: true
@@ -130,6 +130,11 @@ module.exports = {
     hints: false,
   },
   cache: true,
+  // watch: true,
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300
+  },
   stats: "errors-only"
   // stats: {
   //  builtAt: true,

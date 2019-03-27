@@ -6,6 +6,8 @@ import DocumentTreeData from './DocumentTreeData.json'
 import SubjectData from './SubjectData.json'
 import Description from './Description.json'
 import FunctionData from './FunctionData.json'
+import CustomComponents from './CustomComponents'
+
 class Demo extends React.Component {
   constructor(props) {
     super(props)
@@ -13,7 +15,6 @@ class Demo extends React.Component {
       extareaValue: '11'
     }
     this.onChange = this.onChange.bind(this)
-    this.itemChange = this.itemChange.bind(this)
     // console.log(Button)
   }
 
@@ -28,11 +29,6 @@ class Demo extends React.Component {
   */
   onChange(value) {
     console.log(value)
-  }
-
-  itemChange(value, str){
-    // this.itemChange(value)
-    console.log(value, str)
   }
 
   render() {
@@ -50,10 +46,22 @@ class Demo extends React.Component {
         Description={Description}
         FunctionData={FunctionData}
         tabs={[
-          {id:3, name: '辅助核算类型', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算类型',onChange: this.itemChange()},
-          {id:4, name: '辅助核算值', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算值'}
+          {
+            id:6,
+            name: '函数',
+            type: 'custom',
+            component: CustomComponents,
+            disabled: false,
+            notFoundContent: '暂无数据',
+            positionName: '定位:',
+            okName: '确定',
+            dataList: {
+              name: '我自己在组件里需要的数据，访问方式是this.props.item.dataList.name',
+              data: [{id:1, code: 1, name: 1},{id:2, code: 2, name: 2}]
+            }
+          }
         ]}
-        activeKey="0"
+        activeKey="6"
       />
     )
   }

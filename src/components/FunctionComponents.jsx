@@ -30,7 +30,7 @@ class FunctionComponents extends React.Component {
   }
 
   onDoubleClick(item){
-    this.props.onInsertValue(' '+item.value+' ')
+    this.props.onInsertValue(' '+item.showvalue+' ')
     this.props.onDesc(item.code)
   }
 

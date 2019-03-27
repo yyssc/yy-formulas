@@ -116,7 +116,7 @@ class Formulas extends React.Component {
   }
 
   render() {
-    let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData, FunctionData } = this.props
+    let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData, FunctionData,Description } = this.props
     return (
       <div className={prefixCls}>
         <div className="row">
@@ -155,6 +155,8 @@ class Formulas extends React.Component {
             SubjectData={SubjectData}
             onDesc={this.onDesc}
             FunctionData={FunctionData}
+            Description={Description}
+            onClear={this.onClear}
           />
         </div>
         <p className="formulas-desc">{this.state.textDescription}</p>

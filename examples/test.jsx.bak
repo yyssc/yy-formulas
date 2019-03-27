@@ -14,7 +14,7 @@ class Demo extends React.Component {
     console.log(['constructor',arr])
   }
 
-  getDerivedStateFromProps(props,state,...arr){
+  static getDerivedStateFromProps(props,state,...arr){
     // 内部state变化依赖于props时
     console.log(['getDerivedStateFromProps',props,state,arr])
   }
@@ -22,17 +22,18 @@ class Demo extends React.Component {
   componentWillMount(...arr){
     // 遗留函数，在16.3以后不应该再使用。
     console.log(['componentWillMount',arr])
+    // this.setState({name: 'componentWillMount'+Math.random()})
   }
 
   componentDidMount(...arr){
     // 真是DOM被更新之后调用
     // 在创建组件周期，该函数是异步请求的最佳接口，用以加载数据，AJAX/Fetch/redux-dispatch
-    console.log(['componentDidMount',arr])
-    setTimeout(()=>{
-      this.setState({
-        name: Math.random()
-      })
-    },3000)
+    // console.log(['componentDidMount',arr])
+    // setTimeout(()=>{
+    //   this.setState({
+    //     name: Math.random()
+    //   })
+    // },3000)
   }
 
   componentWillReceiveProps(nextProps,...arr){
@@ -56,6 +57,7 @@ class Demo extends React.Component {
 
   getSnapshotBeforeUpdate(prevProps, prevState,...arr){
     console.log(['getSnapshotBeforeUpdate',prevProps, prevState,arr])
+    return {Name: 'name11111'}
   }
 
   componentDidUpdate(prevProps, prevState, snapshot,...arr){
