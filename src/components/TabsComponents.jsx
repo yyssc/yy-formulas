@@ -32,7 +32,7 @@ class TabsComponents extends React.Component {
   }
 
   render() {
-    let { prefixCls, tabs, DocumentTreeData, ReferDataUrl, fixedData, SubjectData,onDesc, FunctionData,Description,onClear } =  this.props
+    let { prefixCls, tabs, DocumentTreeData, ReferDataUrl, fixedData, SubjectData,onDesc,onTextDesc, FunctionData,Description,onClear } =  this.props
     // console.log(this.props)
     return (
       <Tabs
@@ -50,6 +50,7 @@ class TabsComponents extends React.Component {
             ReferDataUrl,
             fixedData,
             onDesc,
+            onTextDesc,
             DocumentTreeData,
             SubjectData,
             FunctionData,

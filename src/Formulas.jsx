@@ -15,6 +15,7 @@ class Formulas extends React.Component {
     this.onClear = this.onClear.bind(this)
     this.onInsertValue = this.onInsertValue.bind(this)
     this.onDesc = this.onDesc.bind(this)
+    this.onTextDesc = this.onTextDesc.bind(this)
     this.state = {
       value: this.props.textareaValue,
       tabs: this.props.tabs,
@@ -115,6 +116,12 @@ class Formulas extends React.Component {
     })
   }
 
+  onTextDesc(textDescription){
+    this.setState({
+      textDescription
+    })
+  }
+
   render() {
     let { prefixCls, textareaPlaceholder, buttonList, tabsPrefixCls, ReferDataUrl, fixedData, SubjectData, FunctionData,Description } = this.props
     return (
@@ -154,6 +161,7 @@ class Formulas extends React.Component {
             fixedData={fixedData}
             SubjectData={SubjectData}
             onDesc={this.onDesc}
+            onTextDesc={this.onTextDesc}
             FunctionData={FunctionData}
             Description={Description}
             onClear={this.onClear}
