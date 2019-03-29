@@ -64182,6 +64182,7 @@ function (_React$Component) {
     _this.onClear = _this.onClear.bind(_assertThisInitialized(_this));
     _this.onInsertValue = _this.onInsertValue.bind(_assertThisInitialized(_this));
     _this.onDesc = _this.onDesc.bind(_assertThisInitialized(_this));
+    _this.onTextDesc = _this.onTextDesc.bind(_assertThisInitialized(_this));
     _this.state = {
       value: _this.props.textareaValue,
       tabs: _this.props.tabs,
@@ -64318,6 +64319,13 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "onTextDesc",
+    value: function onTextDesc(textDescription) {
+      this.setState({
+        textDescription: textDescription
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this5 = this;
@@ -64366,6 +64374,7 @@ function (_React$Component) {
         fixedData: fixedData,
         SubjectData: SubjectData,
         onDesc: this.onDesc,
+        onTextDesc: this.onTextDesc,
         FunctionData: FunctionData,
         Description: Description,
         onClear: this.onClear
@@ -65887,6 +65896,7 @@ function (_React$Component) {
           fixedData = _this$props.fixedData,
           SubjectData = _this$props.SubjectData,
           onDesc = _this$props.onDesc,
+          onTextDesc = _this$props.onTextDesc,
           FunctionData = _this$props.FunctionData,
           Description = _this$props.Description,
           onClear = _this$props.onClear; // console.log(this.props)
@@ -65909,6 +65919,7 @@ function (_React$Component) {
           ReferDataUrl: ReferDataUrl,
           fixedData: fixedData,
           onDesc: onDesc,
+          onTextDesc: onTextDesc,
           DocumentTreeData: DocumentTreeData,
           SubjectData: SubjectData,
           FunctionData: FunctionData,
