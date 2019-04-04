@@ -47,7 +47,7 @@ class Demo extends React.Component {
         tabs={[
           {id:0, name: '单据字段', type: 'sys', component: 'Document', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'},
           {id:1, name: '固定值', type: 'sys', component: 'Fixed', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName1: '档案', showName2: '档案值'},
-          {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定'},
+          {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定',okName2: '插入'},
           {id:3, name: '辅助核算类型', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算类型',onChange: ()=>{}},
           {id:4, name: '辅助核算值', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算值'},
           {id:5, name: '函数', type: 'sys', component: 'Function', disabled: false, notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'}

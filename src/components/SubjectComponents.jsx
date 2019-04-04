@@ -10,6 +10,7 @@ class SubjectComponents extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onTreeSelectChange = this.onTreeSelectChange.bind(this)
     this.onButClick = this.onButClick.bind(this)
+    this.onClickInster = this.onClickInster.bind(this)
     this.state = {
       activeItem: null,
       activeKey: '',
@@ -47,16 +48,31 @@ class SubjectComponents extends React.Component {
 
   onTreeSelectChange(item,index,value,label,extra){
     let treeList = JSON.parse(JSON.stringify(this.state.treeList))
-    treeList[index] = Object.assign(item,{value})
+    let codevalue = extra.triggerNode.props.code
+    treeList[index] = Object.assign(item,{value,codevalue})
     this.setState({
       treeList
     },()=>{
-      if(value){
-        let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'","'+extra.triggerNode.props.code+'") '
-        this.props.onInsertValue(str)
-        this.props.onDesc('cmapping')
+      console.log([this.state.treeList,item,index,value,label,extra])
+      // if(value){
+      //   let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'","'+extra.triggerNode.props.code+'") '
+      //   this.props.onInsertValue(str)
+      //   this.props.onDesc('cmapping')
+      // }
+    })
+  }
+
+  onClickInster(){
+    let codelist = []
+    this.state.treeList.forEach((item)=>{
+      if(item.codevalue){
+        codelist.push(item.codevalue)
       }
     })
+    console.log(this.state.treeList)
+    let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'",'+ codelist.join(',') +') '
+    this.props.onInsertValue(str)
+    this.props.onDesc('cmapping')
   }
 
   onButClick(){
@@ -218,6 +234,20 @@ class SubjectComponents extends React.Component {
               </div>
             )
           })}
+          {this.state.treeList.length > 0 && (
+            <div className="form-group">
+              <label className="col-sm-2 control-label"> </label>
+              <div className="col-sm-10">
+                <button
+                  className="btn btn-primary"
+                  onClick={this.onClickInster}
+                  type="button"
+                >
+                  {this.props.item.okName2}{/*插入*/}
+                </button>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     )
