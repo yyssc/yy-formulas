@@ -64462,14 +64462,15 @@ Formulas.defaultProps = {
     showName2: '档案值'
   }, {
     id: 2,
-    name: '科目转换',
+    name: '科目对照',
     type: 'sys',
     component: 'Subject',
     disabled: false,
     placeholder: '请输入...',
     notFoundContent: '暂无数据',
     positionName: '定位：',
-    okName: '确定'
+    okName: '确定',
+    okName2: '插入'
   }, {
     id: 3,
     name: '辅助核算类型',
@@ -65560,6 +65561,7 @@ function (_React$Component) {
     _this.onClick = _this.onClick.bind(_assertThisInitialized(_this));
     _this.onTreeSelectChange = _this.onTreeSelectChange.bind(_assertThisInitialized(_this));
     _this.onButClick = _this.onButClick.bind(_assertThisInitialized(_this));
+    _this.onClickInster = _this.onClickInster.bind(_assertThisInitialized(_this));
     _this.state = {
       activeItem: null,
       activeKey: '',
@@ -65609,20 +65611,34 @@ function (_React$Component) {
       var _this2 = this;
 
       var treeList = JSON.parse(JSON.stringify(this.state.treeList));
+      var codevalue = extra.triggerNode.props.code;
       treeList[index] = _extends(item, {
-        value: value
+        value: value,
+        codevalue: codevalue
       });
       this.setState({
         treeList: treeList
       }, function () {
-        if (value) {
-          var str = ' cmapping("' + _this2.state.activeItem.code + '/' + _this2.state.activeItem.name + '","' + _this2.state.activeItem.id + '","' + extra.triggerNode.props.code + '") ';
-
-          _this2.props.onInsertValue(str);
-
-          _this2.props.onDesc('cmapping');
+        console.log([_this2.state.treeList, item, index, value, label, extra]); // if(value){
+        //   let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'","'+extra.triggerNode.props.code+'") '
+        //   this.props.onInsertValue(str)
+        //   this.props.onDesc('cmapping')
+        // }
+      });
+    }
+  }, {
+    key: "onClickInster",
+    value: function onClickInster() {
+      var codelist = [];
+      this.state.treeList.forEach(function (item) {
+        if (item.codevalue) {
+          codelist.push(item.codevalue);
         }
       });
+      console.log(this.state.treeList);
+      var str = ' cmapping("' + this.state.activeItem.code + '/' + this.state.activeItem.name + '","' + this.state.activeItem.id + '",' + codelist.join(',') + ') ';
+      this.props.onInsertValue(str);
+      this.props.onDesc('cmapping');
     }
   }, {
     key: "onButClick",
@@ -65781,7 +65797,17 @@ function (_React$Component) {
           treeDefaultExpandAll: true,
           onChange: _this4.onTreeSelectChange.bind(_this4, item, index)
         }, loop(JSON.parse(JSON.stringify(DocumentTreeData))))));
-      })));
+      }), this.state.treeList.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-sm-2 control-label"
+      }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary",
+        onClick: this.onClickInster,
+        type: "button"
+      }, this.props.item.okName2)))));
     }
   }]);
 

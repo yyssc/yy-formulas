@@ -287,7 +287,8 @@ function (_React$Component) {
           placeholder: '请输入...',
           notFoundContent: '暂无数据',
           positionName: '定位：',
-          okName: '确定'
+          okName: '确定',
+          okName2: '插入'
         }, {
           id: 3,
           name: '辅助核算类型',
