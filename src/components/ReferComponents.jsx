@@ -19,6 +19,13 @@ class ReferComponents extends React.Component {
     }
   }
 
+  componentDidMount(){
+    if(this.props.isDefaultValue){
+      console.log(this)
+      this.selecteRef.focus()
+    }
+  }
+
   componentWillReceiveProps(nextProps){
     if(JSON.stringify(nextProps.value)!=JSON.stringify(this.state.value)){
       this.setState({
@@ -52,6 +59,12 @@ class ReferComponents extends React.Component {
         if(data.success){
           that.setState({
             options: data.data.map((item)=>Object.assign(item,{value:item.code,label: item.name}))
+          },()=>{
+            if(that.props.isDefaultValue && that.state.options.length>0){
+              let {id, code, name} = that.state.options[0]
+              that.setState({value: name})
+              that.props.onChange({id, value:name, code, key:id, title:name})
+            }
           })
         }
         // console.log(data)
@@ -118,6 +131,7 @@ class ReferComponents extends React.Component {
     // console.log(this.state.value && this.state.value.value)
     return (
       <Select
+        ref={ref=>this.selecteRef=ref}
         showSearch
         allowClear
         combobox
@@ -169,7 +183,8 @@ ReferComponents.propTypes = {
   value: PropTypes.object,
   isCode: PropTypes.bool,
   placeholder: PropTypes.string,
-  notFoundContent: PropTypes.string
+  notFoundContent: PropTypes.string,
+  isDefaultValue: PropTypes.bool
 }
 
 ReferComponents.defaultProps = {
@@ -190,7 +205,8 @@ ReferComponents.defaultProps = {
   value: {},
   isCode: false,
   placeholder: '请输入...',
-  notFoundContent: '暂无数据'
+  notFoundContent: '暂无数据',
+  isDefaultValue: false
 }
 
 polyfill(ReferComponents)
