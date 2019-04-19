@@ -64973,6 +64973,7 @@ function (_React$Component) {
         url: ReferDataUrl,
         fixedData: fixedData,
         value: this.state.record,
+        isDefaultValue: true,
         placeholder: this.props.item.placeholder,
         notFoundContent: this.props.item.notFoundContent,
         onChange: this.onChange.bind(this, 'record')
@@ -65304,6 +65305,14 @@ function (_React$Component) {
   }
 
   _createClass(ReferComponents, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.isDefaultValue) {
+        console.log(this);
+        this.selecteRef.focus();
+      }
+    }
+  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       if (JSON.stringify(nextProps.value) != JSON.stringify(this.state.value)) {
@@ -65345,6 +65354,23 @@ function (_React$Component) {
                   label: item.name
                 });
               })
+            }, function () {
+              if (that.props.isDefaultValue && that.state.options.length > 0) {
+                var _that$state$options$ = that.state.options[0],
+                    id = _that$state$options$.id,
+                    code = _that$state$options$.code,
+                    name = _that$state$options$.name;
+                that.setState({
+                  value: name
+                });
+                that.props.onChange({
+                  id: id,
+                  value: name,
+                  code: code,
+                  key: id,
+                  title: name
+                });
+              }
             });
           } // console.log(data)
 
@@ -65407,6 +65433,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // return (
       //   <Select
       //     options={this.state.options}
@@ -65432,6 +65460,9 @@ function (_React$Component) {
       // console.log(this.state.value && this.state.value.value)
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        ref: function ref(_ref) {
+          return _this3.selecteRef = _ref;
+        },
         showSearch: true,
         allowClear: true,
         combobox: true // backfill
@@ -65481,7 +65512,8 @@ ReferComponents.propTypes = {
   value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   isCode: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   placeholder: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  notFoundContent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  notFoundContent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  isDefaultValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
 };
 ReferComponents.defaultProps = {
   url: '',
@@ -65501,7 +65533,8 @@ ReferComponents.defaultProps = {
   value: {},
   isCode: false,
   placeholder: '请输入...',
-  notFoundContent: '暂无数据'
+  notFoundContent: '暂无数据',
+  isDefaultValue: false
 };
 Object(react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__["polyfill"])(ReferComponents);
 /* harmony default export */ __webpack_exports__["default"] = (ReferComponents);
