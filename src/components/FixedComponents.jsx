@@ -44,7 +44,7 @@ class FixedComponents extends React.Component {
                 url={ReferDataUrl}
                 fixedData={fixedData}
                 value={this.state.record}
-                isDefaultValue
+                defaultCode={this.props.item.defaultCode}
                 placeholder={this.props.item.placeholder}
                 notFoundContent={this.props.item.notFoundContent}
                 onChange={this.onChange.bind(this,'record')}

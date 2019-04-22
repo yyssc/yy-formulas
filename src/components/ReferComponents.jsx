@@ -20,8 +20,7 @@ class ReferComponents extends React.Component {
   }
 
   componentDidMount(){
-    if(this.props.isDefaultValue){
-      console.log(this)
+    if(this.props.defaultCode){
       this.selecteRef.focus()
     }
   }
@@ -60,10 +59,14 @@ class ReferComponents extends React.Component {
           that.setState({
             options: data.data.map((item)=>Object.assign(item,{value:item.code,label: item.name}))
           },()=>{
-            if(that.props.isDefaultValue && that.state.options.length>0){
-              let {id, code, name} = that.state.options[0]
-              that.setState({value: name})
-              that.props.onChange({id, value:name, code, key:id, title:name})
+            if(that.props.defaultCode && that.state.options.length>0){
+              that.state.options.forEach((item)=>{
+                if(item.code===that.props.defaultCode){
+                  let {id, code, name} = item
+                  that.setState({value: name})
+                  that.props.onChange({id, value:name, code, key:id, title:name})
+                }
+              })
             }
           })
         }
@@ -184,7 +187,7 @@ ReferComponents.propTypes = {
   isCode: PropTypes.bool,
   placeholder: PropTypes.string,
   notFoundContent: PropTypes.string,
-  isDefaultValue: PropTypes.bool
+  defaultCode: PropTypes.bool
 }
 
 ReferComponents.defaultProps = {
@@ -206,7 +209,7 @@ ReferComponents.defaultProps = {
   isCode: false,
   placeholder: '请输入...',
   notFoundContent: '暂无数据',
-  isDefaultValue: false
+  defaultCode: ''
 }
 
 polyfill(ReferComponents)
