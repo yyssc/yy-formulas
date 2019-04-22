@@ -277,7 +277,8 @@ function (_React$Component) {
           placeholder: '请输入...',
           notFoundContent: '暂无数据',
           showName1: '档案',
-          showName2: '档案值'
+          showName2: '档案值',
+          defaultCode: 'personnel'
         }, {
           id: 2,
           name: '科目转换',
