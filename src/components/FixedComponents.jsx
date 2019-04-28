@@ -14,6 +14,17 @@ class FixedComponents extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.id != this.state.id){
+      this.setState({
+        id: nextProps.id,
+        record: {},
+        record2: {},
+        recordValue: {}
+      })
+    }
+  }
+
   onChange(type,value){
     // console.log([type,value])
     this.setState({
@@ -34,6 +45,7 @@ class FixedComponents extends React.Component {
 
   render() {
     let { ReferDataUrl, fixedData } = this.props
+    console.log(['fixedData',fixedData])
     return (
       <div className="yy-tab-content">
         <form className="form-horizontal">

@@ -23,7 +23,8 @@ class Formulas extends React.Component {
       activeKey: this.props.activeKey,
       DocumentTreeData: this.props.DocumentTreeData,
       DocumentTreeDataJSON: JSON.stringify(this.props.DocumentTreeData),
-      textDescription: ''
+      textDescription: '',
+      id: ''
     }
     // this.yyFormulasTextareaRef = React.createRef()
   }
@@ -61,10 +62,12 @@ class Formulas extends React.Component {
 
   onCancel() {
     this.props.onCancel(this.state.value)
+    this.setState({id: Math.random()})
   }
 
   onSubmit(){
     this.props.onSubmit(this.state.value)
+    this.setState({id: Math.random()})
   }
 
   onValidate() {
@@ -165,6 +168,7 @@ class Formulas extends React.Component {
             FunctionData={FunctionData}
             Description={Description}
             onClear={this.onClear}
+            id={this.state.id}
           />
         </div>
         <p className="formulas-desc">{this.state.textDescription}</p>
