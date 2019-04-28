@@ -64190,7 +64190,8 @@ function (_React$Component) {
       activeKey: _this.props.activeKey,
       DocumentTreeData: _this.props.DocumentTreeData,
       DocumentTreeDataJSON: JSON.stringify(_this.props.DocumentTreeData),
-      textDescription: '' // this.yyFormulasTextareaRef = React.createRef()
+      textDescription: '',
+      id: '' // this.yyFormulasTextareaRef = React.createRef()
 
     };
     return _this;
@@ -64251,11 +64252,17 @@ function (_React$Component) {
     key: "onCancel",
     value: function onCancel() {
       this.props.onCancel(this.state.value);
+      this.setState({
+        id: Math.random()
+      });
     }
   }, {
     key: "onSubmit",
     value: function onSubmit() {
       this.props.onSubmit(this.state.value);
+      this.setState({
+        id: Math.random()
+      });
     }
   }, {
     key: "onValidate",
@@ -64377,7 +64384,8 @@ function (_React$Component) {
         onTextDesc: this.onTextDesc,
         FunctionData: FunctionData,
         Description: Description,
-        onClear: this.onClear
+        onClear: this.onClear,
+        id: this.state.id
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "formulas-desc"
       }, this.state.textDescription));
@@ -64927,6 +64935,18 @@ function (_React$Component) {
   }
 
   _createClass(FixedComponents, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.id != this.state.id) {
+        this.setState({
+          id: nextProps.id,
+          record: {},
+          record2: {},
+          recordValue: {}
+        });
+      }
+    }
+  }, {
     key: "onChange",
     value: function onChange(type, value) {
       var _this2 = this;
@@ -64959,6 +64979,7 @@ function (_React$Component) {
       var _this$props = this.props,
           ReferDataUrl = _this$props.ReferDataUrl,
           fixedData = _this$props.fixedData;
+      console.log(['fixedData', fixedData]);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "yy-tab-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -65960,7 +65981,8 @@ function (_React$Component) {
           onTextDesc = _this$props.onTextDesc,
           FunctionData = _this$props.FunctionData,
           Description = _this$props.Description,
-          onClear = _this$props.onClear; // console.log(this.props)
+          onClear = _this$props.onClear,
+          id = _this$props.id; // console.log(this.props)
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tabs__WEBPACK_IMPORTED_MODULE_3__["default"], {
         prefixCls: prefixCls,
@@ -65985,7 +66007,8 @@ function (_React$Component) {
           SubjectData: SubjectData,
           FunctionData: FunctionData,
           Description: Description,
-          onClear: onClear
+          onClear: onClear,
+          id: id
         };
 
         if (typeof item.component === 'string') {
