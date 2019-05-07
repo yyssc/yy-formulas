@@ -64821,7 +64821,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var DocumentTreeData = this.props.DocumentTreeData; // let value = this.state.value
+      var DocumentTreeData = this.props.DocumentTreeData;
+      var defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []; // let value = this.state.value
       // let selectedKeys = []
       // const loop = (data)=>{
       //   // console.log(data)
@@ -64848,8 +64849,9 @@ function (_React$Component) {
         prefixCls: "rc-tree",
         showLine: true,
         showIcon: false,
-        checkable: false,
-        defaultExpandAll: true,
+        checkable: false // defaultExpandAll
+        ,
+        defaultExpandedKeys: defaultExpandedKeys,
         className: "myCls",
         autoExpandParent: true,
         selectedKeys: this.state.selectedKeys,
@@ -65750,7 +65752,8 @@ function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var DocumentTreeData = this.props.DocumentTreeData; // let value = this.state.value
+      var DocumentTreeData = this.props.DocumentTreeData;
+      var defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []; // let value = this.state.value
       // console.log(DocumentTreeData)
 
       var loop = function loop(data) {
@@ -65849,8 +65852,9 @@ function (_React$Component) {
           ,
           notFoundContent: _this4.props.item.notFoundContent // "暂无数据"
           ,
-          allowClear: true,
-          treeDefaultExpandAll: true,
+          allowClear: true // treeDefaultExpandAll
+          ,
+          treeDefaultExpandedKeys: defaultExpandedKeys,
           onChange: _this4.onTreeSelectChange.bind(_this4, item, index)
         }, loop(JSON.parse(JSON.stringify(DocumentTreeData))))));
       }), this.state.treeList.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
