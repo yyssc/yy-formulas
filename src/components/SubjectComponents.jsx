@@ -120,6 +120,7 @@ class SubjectComponents extends React.Component {
 
   render() {
     let { DocumentTreeData } = this.props
+    let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     // let value = this.state.value
     // console.log(DocumentTreeData)
     const loop = (data)=>{
@@ -225,7 +226,8 @@ class SubjectComponents extends React.Component {
                     placeholder={this.props.item.placeholder} // "请输入..."
                     notFoundContent={this.props.item.notFoundContent} // "暂无数据"
                     allowClear
-                    treeDefaultExpandAll
+                    // treeDefaultExpandAll
+                    treeDefaultExpandedKeys={defaultExpandedKeys}
                     onChange={this.onTreeSelectChange.bind(this,item,index)}
                   >
                     {loop(JSON.parse(JSON.stringify(DocumentTreeData)))}

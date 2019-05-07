@@ -118,6 +118,7 @@ class DocumentComponents extends React.Component {
 
   render() {
     let { DocumentTreeData } = this.props
+    let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     // let value = this.state.value
     // let selectedKeys = []
     // const loop = (data)=>{
@@ -148,7 +149,8 @@ class DocumentComponents extends React.Component {
           showLine
           showIcon={false}
           checkable={false}
-          defaultExpandAll
+          // defaultExpandAll
+          defaultExpandedKeys={defaultExpandedKeys}
           className="myCls"
           autoExpandParent
           selectedKeys={this.state.selectedKeys}
