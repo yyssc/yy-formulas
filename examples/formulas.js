@@ -318,6 +318,26 @@ function (_React$Component) {
           notFoundContent: '暂无数据',
           positionName: '定位:',
           okName: '确定'
+        }, {
+          id: 6,
+          name: '枚举',
+          type: 'sys',
+          component: 'Enum',
+          disabled: false,
+          placeholder: '请输入...',
+          notFoundContent: '暂无数据',
+          showName1: '枚举类型',
+          showName2: '枚举值',
+          data1: {
+            refCode: 'enum',
+            funcode: 'conversion',
+            disableshow: false
+          },
+          data2: {
+            refCode: 'enumbody',
+            funcode: 'conversion',
+            disableshow: false
+          }
         }],
         activeKey: "0"
       });

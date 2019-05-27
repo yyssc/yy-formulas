@@ -64474,7 +64474,8 @@ Formulas.defaultProps = {
     notFoundContent: '暂无数据',
     positionName: '定位：',
     okName: '确定',
-    formTitle: undefined.props.subjecttitle ? '影响因素' : ''
+    formTitle: '影响因素',
+    notSubject: '暂无影响因素'
   }, {
     id: 3,
     name: '辅助核算类型',
@@ -64503,6 +64504,26 @@ Formulas.defaultProps = {
     notFoundContent: '暂无数据',
     positionName: '定位:',
     okName: '确定'
+  }, {
+    id: 6,
+    name: '枚举',
+    type: 'sys',
+    component: 'Enum',
+    disabled: false,
+    placeholder: '请输入...',
+    notFoundContent: '暂无数据',
+    showName1: '枚举类型',
+    showName2: '枚举值',
+    data1: {
+      refCode: 'enum',
+      funcode: 'conversion',
+      disableshow: false
+    },
+    data2: {
+      refCode: 'enumbody',
+      funcode: 'conversion',
+      disableshow: false
+    }
   }],
   activeKey: '0',
   DocumentTreeData: [],
@@ -64876,6 +64897,144 @@ DocumentComponents.defaultProps = {
 };
 Object(react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__["polyfill"])(DocumentComponents);
 /* harmony default export */ __webpack_exports__["default"] = (DocumentComponents);
+
+/***/ }),
+
+/***/ "./src/components/EnumComponents.jsx":
+/*!*******************************************!*\
+  !*** ./src/components/EnumComponents.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-lifecycles-compat */ "./node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js");
+/* harmony import */ var _ReferComponents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReferComponents */ "./src/components/ReferComponents.jsx");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var EnumComponents =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(EnumComponents, _React$Component);
+
+  function EnumComponents(props) {
+    var _this;
+
+    _classCallCheck(this, EnumComponents);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EnumComponents).call(this, props));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.state = {
+      record: {},
+      record2: {}
+    };
+    return _this;
+  }
+
+  _createClass(EnumComponents, [{
+    key: "onChange",
+    value: function onChange(type, value) {
+      var _this2 = this;
+
+      // console.log([type,value])
+      this.setState(_defineProperty({}, type, value), function () {
+        if (type === 'record2') {
+          var str = '';
+
+          if (value.id) {
+            str = ' getCode("' + _this2.state.record.code + '","' + value.title + '") ';
+
+            _this2.props.onInsertValue(str);
+
+            _this2.props.onDesc('GetCode');
+          }
+
+          if (_this2.props.item.onChange) {
+            _this2.props.item.onChange(str, value);
+          }
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var ReferDataUrl = this.props.ReferDataUrl;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "yy-tab-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "form-horizontal"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-sm-2 control-label"
+      }, this.props.item.showName1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        url: ReferDataUrl,
+        fixedData: this.props.item.data1,
+        value: this.state.record,
+        placeholder: this.props.item.placeholder,
+        notFoundContent: this.props.item.notFoundContent,
+        onChange: this.onChange.bind(this, 'record')
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-sm-2 control-label"
+      }, this.props.item.showName2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        url: ReferDataUrl,
+        fixedData: this.props.item.data2,
+        value: this.state.record2,
+        disabled: !this.state.record.code,
+        placeholder: this.props.item.placeholder,
+        notFoundContent: this.props.item.notFoundContent,
+        onChange: this.onChange.bind(this, 'record2')
+      })))));
+    }
+  }]);
+
+  return EnumComponents;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+EnumComponents.propTypes = {
+  item: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  ReferDataUrl: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  fixedData: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+EnumComponents.defaultProps = {
+  item: {},
+  ReferDataUrl: '',
+  fixedData: {}
+};
+Object(react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__["polyfill"])(EnumComponents);
+/* harmony default export */ __webpack_exports__["default"] = (EnumComponents);
 
 /***/ }),
 
@@ -65859,7 +66018,7 @@ function (_React$Component) {
         }, item.code, " / ", item.name));
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "form-horizontal"
-      }, this.state.activeItem && this.state.treeList.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u6682\u65E0\u5F71\u54CD\u56E0\u7D20"), this.state.treeList.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, this.props.item.formTitle), this.state.treeList.map(function (item, index) {
+      }, this.state.activeItem && this.state.treeList.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, this.props.item.notSubject), this.state.treeList.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, this.props.item.formTitle), this.state.treeList.map(function (item, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: item.id,
           className: "form-group"
@@ -65937,6 +66096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SubjectComponents__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SubjectComponents */ "./src/components/SubjectComponents.jsx");
 /* harmony import */ var _AuxiliaryComponents__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AuxiliaryComponents */ "./src/components/AuxiliaryComponents.jsx");
 /* harmony import */ var _FunctionComponents__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FunctionComponents */ "./src/components/FunctionComponents.jsx");
+/* harmony import */ var _EnumComponents__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./EnumComponents */ "./src/components/EnumComponents.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65954,6 +66114,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -66056,6 +66217,8 @@ function (_React$Component) {
             Component = _AuxiliaryComponents__WEBPACK_IMPORTED_MODULE_9__["default"];
           } else if (item.component === 'Function') {
             Component = _FunctionComponents__WEBPACK_IMPORTED_MODULE_10__["default"];
+          } else if (item.component === 'Enum') {
+            Component = _EnumComponents__WEBPACK_IMPORTED_MODULE_11__["default"];
           }
         }
 
