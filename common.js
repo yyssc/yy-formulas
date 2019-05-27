@@ -64915,6 +64915,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_lifecycles_compat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-lifecycles-compat */ "./node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js");
 /* harmony import */ var _ReferComponents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReferComponents */ "./src/components/ReferComponents.jsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64985,6 +64987,18 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var ReferDataUrl = this.props.ReferDataUrl;
+      var fixedData = JSON.parse(JSON.stringify(this.props.item.data1)); // fixedData.refCode='entity'
+
+      var fixedData2 = JSON.parse(JSON.stringify(this.props.item.data2));
+
+      if (this.state.record && this.state.record.id) {
+        _extends(fixedData2, {
+          filterCondition: JSON.stringify({
+            header: this.state.record.id
+          })
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "yy-tab-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -64997,7 +65011,7 @@ function (_React$Component) {
         className: "col-sm-10"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
-        fixedData: this.props.item.data1,
+        fixedData: fixedData,
         value: this.state.record,
         placeholder: this.props.item.placeholder,
         notFoundContent: this.props.item.notFoundContent,
@@ -65010,9 +65024,9 @@ function (_React$Component) {
         className: "col-sm-10"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
-        fixedData: this.props.item.data2,
+        fixedData: fixedData2,
         value: this.state.record2,
-        disabled: !this.state.record.code,
+        disabled: !this.state.record.id,
         placeholder: this.props.item.placeholder,
         notFoundContent: this.props.item.notFoundContent,
         onChange: this.onChange.bind(this, 'record2')
