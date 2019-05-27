@@ -24,7 +24,7 @@ class Formulas extends React.Component {
       DocumentTreeData: this.props.DocumentTreeData,
       DocumentTreeDataJSON: JSON.stringify(this.props.DocumentTreeData),
       textDescription: '',
-      id: ''
+      id: '1'
     }
     // this.yyFormulasTextareaRef = React.createRef()
   }
@@ -110,6 +110,7 @@ class Formulas extends React.Component {
         yyFormulasTextareaRef.selectionEnd = this.state.value.length
       })
     }
+    yyFormulasTextareaRef.focus()
   }
 
   onDesc(key){
@@ -205,8 +206,8 @@ Formulas.defaultProps = {
   buttonList: [
     {name: '确定', className: 'btn btn-default', event: 'onSubmit'},
     {name: '取消', className: 'btn btn-default', event: 'onCancel'},
-    {name: '验证', className: 'btn btn-default', event: 'onValidate'},
-    {name: '全选', className: 'btn btn-default', event: 'onValueSelected'},
+    //{name: '验证', className: 'btn btn-default', event: 'onValidate'},
+    //{name: '全选', className: 'btn btn-default', event: 'onValueSelected'},
     {name: '清空', className: 'btn btn-default', event: 'onClear'}
   ],
   onCancel: noop,
@@ -217,7 +218,7 @@ Formulas.defaultProps = {
   tabs: [
     {id:0, name: '单据字段', type: 'sys', component: 'Document', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'},
     {id:1, name: '固定值', type: 'sys', component: 'Fixed', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName1: '档案', showName2: '档案值'},
-    {id:2, name: '科目对照', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定' ,okName2: '插入'},
+    {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定'},
     {id:3, name: '辅助核算类型', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算类型',onChange: noop},
     {id:4, name: '辅助核算值', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算值'},
     {id:5, name: '函数', type: 'sys', component: 'Function', disabled: false, notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'}

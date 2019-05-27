@@ -133,6 +133,13 @@ class DocumentComponents extends React.Component {
               className="form-control"
               onChange={this.onChange}
               value={this.state.value}
+              onKeyPress={(event)=>{
+                if(event.key==='Enter'){
+                  event.preventDefault()
+                  event.stopPropagation()
+                  return false
+                }
+              }}
             />
           </div>
           <button

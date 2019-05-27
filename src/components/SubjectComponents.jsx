@@ -38,22 +38,32 @@ class SubjectComponents extends React.Component {
         }
       })
     }
-    // console.log(treeList)
+    // treeList=[]
+    this.props.onDesc('')
     this.setState({
       treeList,
       activeKey,
       activeItem
+    },()=>{
+      if(this.state.treeList.length===0){
+        let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'") '
+        this.props.onInsertValue(str)
+        this.props.onDesc('cmapping')
+      }
     })
   }
 
   onTreeSelectChange(item,index,value,label,extra){
     let treeList = JSON.parse(JSON.stringify(this.state.treeList))
-    let codevalue = extra.triggerNode.props.code
+    // let codevalue = extra.triggerNode.props.code
+    let codevalue = extra.triggerNode.props.eventKey
+    codevalue = codevalue.substr(codevalue.indexOf('.') + 1)
+    // console.log(codevalue);
     treeList[index] = Object.assign(item,{value,codevalue})
     this.setState({
       treeList
     },()=>{
-      console.log([this.state.treeList,item,index,value,label,extra])
+      // console.log([this.state.treeList,item,index,value,label,extra])
       // if(value){
       //   let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'","'+extra.triggerNode.props.code+'") '
       //   this.props.onInsertValue(str)
@@ -66,10 +76,13 @@ class SubjectComponents extends React.Component {
     let codelist = []
     this.state.treeList.forEach((item)=>{
       if(item.codevalue){
+        // console.log(item);
         codelist.push(item.codevalue)
       }
     })
-    console.log(this.state.treeList)
+    // let key = code.substr(code.indexOf('.') + 1)
+    //   this.props.onInsertValue(' '+key+ ' ')
+    // console.log(codelist,this.state.treeList,this.state.activeItem.code,this.state.activeItem)
     let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'",'+ codelist.join(',') +') '
     this.props.onInsertValue(str)
     this.props.onDesc('cmapping')
@@ -134,6 +147,7 @@ class SubjectComponents extends React.Component {
         // }else{
         //   // console.log(isflag)
         // }
+
         if(item.children && item.children.length > 0){
           return (
             <TreeNode
@@ -209,6 +223,8 @@ class SubjectComponents extends React.Component {
         </div>
         <hr />
         <form className="form-horizontal">
+          {this.state.activeItem && this.state.treeList.length === 0 && (<label>暂无影响因素</label>)}
+          {this.state.treeList.length > 0 && (<label>{this.props.item.formTitle}</label>)}
           {this.state.treeList.map((item,index)=>{
             return (
               <div
@@ -226,7 +242,7 @@ class SubjectComponents extends React.Component {
                     placeholder={this.props.item.placeholder} // "请输入..."
                     notFoundContent={this.props.item.notFoundContent} // "暂无数据"
                     allowClear
-                    // treeDefaultExpandAll
+                    //treeDefaultExpandAll
                     treeDefaultExpandedKeys={defaultExpandedKeys}
                     onChange={this.onTreeSelectChange.bind(this,item,index)}
                   >

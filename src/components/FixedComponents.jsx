@@ -8,13 +8,14 @@ class FixedComponents extends React.Component {
     super(props)
     this.onChange = this.onChange.bind(this)
     this.state = {
+      id: this.props.id,
       record: {},
       record2: {},
       recordValue: {}
     }
   }
-
   componentWillReceiveProps(nextProps){
+    // console.log(nextProps.id, this.state.id);
     if(nextProps.id != this.state.id){
       this.setState({
         id: nextProps.id,
@@ -45,7 +46,8 @@ class FixedComponents extends React.Component {
 
   render() {
     let { ReferDataUrl, fixedData } = this.props
-    console.log(['fixedData',fixedData])
+    // console.log(['fixedData',fixedData,this.state]);
+    // console.log(['this.state',this.state,fixedData]);
     return (
       <div className="yy-tab-content">
         <form className="form-horizontal">
@@ -54,7 +56,7 @@ class FixedComponents extends React.Component {
             <div className="col-sm-10">
               <ReferComponents
                 url={ReferDataUrl}
-                fixedData={fixedData}
+                fixedData={JSON.parse(JSON.stringify(fixedData))}
                 value={this.state.record}
                 defaultCode={this.props.item.defaultCode}
                 placeholder={this.props.item.placeholder}
@@ -71,7 +73,7 @@ class FixedComponents extends React.Component {
                   <ReferComponents
                     url={ReferDataUrl}
                     isCode
-                    fixedData={Object.assign({},fixedData,{refCode: 'accsubjectchart',refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
+                    fixedData={Object.assign({},JSON.parse(JSON.stringify(fixedData)),{refCode: 'accsubjectchart',refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
                     disabled={!this.state.record.code}
                     value={this.state.record2}
                     placeholder={this.props.item.placeholder}
@@ -81,7 +83,7 @@ class FixedComponents extends React.Component {
                   <ReferComponents
                     url={ReferDataUrl}
                     isCode
-                    fixedData={Object.assign({},fixedData,{refCode: this.state.record.code,filterCondition: '{"accsubjectchart":"'+this.state.record2.id+'"}',refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
+                    fixedData={Object.assign({},JSON.parse(JSON.stringify(fixedData)),{refCode: this.state.record.code,filterCondition: JSON.stringify({accsubjectchart:this.state.record2.id ? this.state.record2.id : ''}),refType: 'table',fields: ['id', 'code', 'name'],orderby: 'code asc',displayFields: ['id', 'code', 'name']})}
                     disabled={!this.state.record2.code}
                     value={this.state.recordValue}
                     placeholder={this.props.item.placeholder}
@@ -92,7 +94,7 @@ class FixedComponents extends React.Component {
               ) : (
                 <ReferComponents
                   url={ReferDataUrl}
-                  fixedData={Object.assign({},fixedData,{refCode:this.state.record.code})}
+                  fixedData={Object.assign({},JSON.parse(JSON.stringify(fixedData)),{refCode:this.state.record.code})}
                   disabled={!this.state.record.code}
                   value={this.state.recordValue}
                   placeholder={this.props.item.placeholder}

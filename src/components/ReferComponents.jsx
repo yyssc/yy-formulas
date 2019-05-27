@@ -43,7 +43,7 @@ class ReferComponents extends React.Component {
     let that = this
     jQuery.ajax({
       url: that.props.url,
-      data: JSON.stringify(Object.assign(that.props.sendData,that.props.fixedData)),
+      data: JSON.stringify(Object.assign(JSON.parse(JSON.stringify(that.props.sendData)),that.props.fixedData)),
       method: 'POST',
       beforeSend:(xhr,settings)=>{
         // console.log([xhr,settings])
