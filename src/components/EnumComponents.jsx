@@ -34,6 +34,12 @@ class EnumComponents extends React.Component {
 
   render() {
     let { ReferDataUrl } = this.props
+    let fixedData = JSON.parse(JSON.stringify(this.props.item.data1))
+    // fixedData.refCode='entity'
+    let fixedData2 = JSON.parse(JSON.stringify(this.props.item.data2))
+    if(this.state.record && this.state.record.id){
+      Object.assign(fixedData2,{filterCondition:JSON.stringify({header: this.state.record.id})})
+    }
     return (
       <div className="yy-tab-content">
         <form className="form-horizontal">
@@ -42,7 +48,7 @@ class EnumComponents extends React.Component {
             <div className="col-sm-10">
               <ReferComponents
                 url={ReferDataUrl}
-                fixedData={this.props.item.data1}
+                fixedData={fixedData}
                 value={this.state.record}
                 placeholder={this.props.item.placeholder}
                 notFoundContent={this.props.item.notFoundContent}
@@ -55,9 +61,9 @@ class EnumComponents extends React.Component {
             <div className="col-sm-10">
               <ReferComponents
                 url={ReferDataUrl}
-                fixedData={this.props.item.data2}
+                fixedData={fixedData2}
                 value={this.state.record2}
-                disabled={!this.state.record.code}
+                disabled={!this.state.record.id}
                 placeholder={this.props.item.placeholder}
                 notFoundContent={this.props.item.notFoundContent}
                 onChange={this.onChange.bind(this,'record2')}
