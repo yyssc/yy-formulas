@@ -64191,7 +64191,7 @@ function (_React$Component) {
       DocumentTreeData: _this.props.DocumentTreeData,
       DocumentTreeDataJSON: JSON.stringify(_this.props.DocumentTreeData),
       textDescription: '',
-      id: '' // this.yyFormulasTextareaRef = React.createRef()
+      id: '1' // this.yyFormulasTextareaRef = React.createRef()
 
     };
     return _this;
@@ -64316,6 +64316,8 @@ function (_React$Component) {
           yyFormulasTextareaRef.selectionEnd = _this4.state.value.length;
         });
       }
+
+      yyFormulasTextareaRef.focus();
     }
   }, {
     key: "onDesc",
@@ -64430,15 +64432,9 @@ Formulas.defaultProps = {
     name: '取消',
     className: 'btn btn-default',
     event: 'onCancel'
-  }, {
-    name: '验证',
-    className: 'btn btn-default',
-    event: 'onValidate'
-  }, {
-    name: '全选',
-    className: 'btn btn-default',
-    event: 'onValueSelected'
-  }, {
+  }, //{name: '验证', className: 'btn btn-default', event: 'onValidate'},
+  //{name: '全选', className: 'btn btn-default', event: 'onValueSelected'},
+  {
     name: '清空',
     className: 'btn btn-default',
     event: 'onClear'
@@ -64470,7 +64466,7 @@ Formulas.defaultProps = {
     showName2: '档案值'
   }, {
     id: 2,
-    name: '科目对照',
+    name: '科目转换',
     type: 'sys',
     component: 'Subject',
     disabled: false,
@@ -64478,7 +64474,7 @@ Formulas.defaultProps = {
     notFoundContent: '暂无数据',
     positionName: '定位：',
     okName: '确定',
-    okName2: '插入'
+    formTitle: undefined.props.subjecttitle ? '影响因素' : ''
   }, {
     id: 3,
     name: '辅助核算类型',
@@ -64837,7 +64833,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
+        onKeyPress: function onKeyPress(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+        }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           marginLeft: '10px'
@@ -64929,6 +64932,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FixedComponents).call(this, props));
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.state = {
+      id: _this.props.id,
       record: {},
       record2: {},
       recordValue: {}
@@ -64939,6 +64943,7 @@ function (_React$Component) {
   _createClass(FixedComponents, [{
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
+      // console.log(nextProps.id, this.state.id);
       if (nextProps.id != this.state.id) {
         this.setState({
           id: nextProps.id,
@@ -64980,8 +64985,9 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           ReferDataUrl = _this$props.ReferDataUrl,
-          fixedData = _this$props.fixedData;
-      console.log(['fixedData', fixedData]);
+          fixedData = _this$props.fixedData; // console.log(['fixedData',fixedData,this.state]);
+      // console.log(['this.state',this.state,fixedData]);
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "yy-tab-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -64994,7 +65000,7 @@ function (_React$Component) {
         className: "col-sm-10"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
-        fixedData: fixedData,
+        fixedData: JSON.parse(JSON.stringify(fixedData)),
         value: this.state.record,
         defaultCode: this.props.item.defaultCode,
         placeholder: this.props.item.placeholder,
@@ -65009,7 +65015,7 @@ function (_React$Component) {
       }, this.state.record.code === 'accsubject' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
         isCode: true,
-        fixedData: _extends({}, fixedData, {
+        fixedData: _extends({}, JSON.parse(JSON.stringify(fixedData)), {
           refCode: 'accsubjectchart',
           refType: 'table',
           fields: ['id', 'code', 'name'],
@@ -65024,9 +65030,11 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
         isCode: true,
-        fixedData: _extends({}, fixedData, {
+        fixedData: _extends({}, JSON.parse(JSON.stringify(fixedData)), {
           refCode: this.state.record.code,
-          filterCondition: '{"accsubjectchart":"' + this.state.record2.id + '"}',
+          filterCondition: JSON.stringify({
+            accsubjectchart: this.state.record2.id ? this.state.record2.id : ''
+          }),
           refType: 'table',
           fields: ['id', 'code', 'name'],
           orderby: 'code asc',
@@ -65039,7 +65047,7 @@ function (_React$Component) {
         onChange: this.onChange.bind(this, 'recordValue')
       })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReferComponents__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: ReferDataUrl,
-        fixedData: _extends({}, fixedData, {
+        fixedData: _extends({}, JSON.parse(JSON.stringify(fixedData)), {
           refCode: this.state.record.code
         }),
         disabled: !this.state.record.code,
@@ -65209,7 +65217,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
+        onKeyPress: function onKeyPress(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+        }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           marginLeft: '10px'
@@ -65356,7 +65371,7 @@ function (_React$Component) {
       var that = this;
       jquery__WEBPACK_IMPORTED_MODULE_3___default.a.ajax({
         url: that.props.url,
-        data: JSON.stringify(_extends(that.props.sendData, that.props.fixedData)),
+        data: JSON.stringify(_extends(JSON.parse(JSON.stringify(that.props.sendData)), that.props.fixedData)),
         method: 'POST',
         beforeSend: function beforeSend(xhr, settings) {
           // console.log([xhr,settings])
@@ -65639,6 +65654,8 @@ function (_React$Component) {
   }, {
     key: "onClick",
     value: function onClick(item) {
+      var _this2 = this;
+
       var activeKey = item.id;
       var treeList = [];
       var activeItem = null;
@@ -65654,30 +65671,40 @@ function (_React$Component) {
             treeList.push(item[key]);
           }
         });
-      } // console.log(treeList)
+      } // treeList=[]
 
 
+      this.props.onDesc('');
       this.setState({
         treeList: treeList,
         activeKey: activeKey,
         activeItem: activeItem
+      }, function () {
+        if (_this2.state.treeList.length === 0) {
+          var str = ' cmapping("' + _this2.state.activeItem.code + '/' + _this2.state.activeItem.name + '","' + _this2.state.activeItem.id + '") ';
+
+          _this2.props.onInsertValue(str);
+
+          _this2.props.onDesc('cmapping');
+        }
       });
     }
   }, {
     key: "onTreeSelectChange",
     value: function onTreeSelectChange(item, index, value, label, extra) {
-      var _this2 = this;
+      var treeList = JSON.parse(JSON.stringify(this.state.treeList)); // let codevalue = extra.triggerNode.props.code
 
-      var treeList = JSON.parse(JSON.stringify(this.state.treeList));
-      var codevalue = extra.triggerNode.props.code;
+      var codevalue = extra.triggerNode.props.eventKey;
+      codevalue = codevalue.substr(codevalue.indexOf('.') + 1); // console.log(codevalue);
+
       treeList[index] = _extends(item, {
         value: value,
         codevalue: codevalue
       });
       this.setState({
         treeList: treeList
-      }, function () {
-        console.log([_this2.state.treeList, item, index, value, label, extra]); // if(value){
+      }, function () {// console.log([this.state.treeList,item,index,value,label,extra])
+        // if(value){
         //   let str = ' cmapping("'+this.state.activeItem.code+'/'+this.state.activeItem.name+'","'+this.state.activeItem.id+'","'+extra.triggerNode.props.code+'") '
         //   this.props.onInsertValue(str)
         //   this.props.onDesc('cmapping')
@@ -65690,10 +65717,13 @@ function (_React$Component) {
       var codelist = [];
       this.state.treeList.forEach(function (item) {
         if (item.codevalue) {
+          // console.log(item);
           codelist.push(item.codevalue);
         }
-      });
-      console.log(this.state.treeList);
+      }); // let key = code.substr(code.indexOf('.') + 1)
+      //   this.props.onInsertValue(' '+key+ ' ')
+      // console.log(codelist,this.state.treeList,this.state.activeItem.code,this.state.activeItem)
+
       var str = ' cmapping("' + this.state.activeItem.code + '/' + this.state.activeItem.name + '","' + this.state.activeItem.id + '",' + codelist.join(',') + ') ';
       this.props.onInsertValue(str);
       this.props.onDesc('cmapping');
@@ -65829,7 +65859,7 @@ function (_React$Component) {
         }, item.code, " / ", item.name));
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "form-horizontal"
-      }, this.state.treeList.map(function (item, index) {
+      }, this.state.activeItem && this.state.treeList.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u6682\u65E0\u5F71\u54CD\u56E0\u7D20"), this.state.treeList.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, this.props.item.formTitle), this.state.treeList.map(function (item, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: item.id,
           className: "form-group"
@@ -65852,7 +65882,7 @@ function (_React$Component) {
           ,
           notFoundContent: _this4.props.item.notFoundContent // "暂无数据"
           ,
-          allowClear: true // treeDefaultExpandAll
+          allowClear: true //treeDefaultExpandAll
           ,
           treeDefaultExpandedKeys: defaultExpandedKeys,
           onChange: _this4.onTreeSelectChange.bind(_this4, item, index)

@@ -8755,12 +8755,13 @@ li.rc-select-dropdown-menu-item-divider {
   zoom: 1;
 }
 .yy-formulas .yy-formulas-textarea-warp {
-  height: 180px;
+  height: 107px;
 }
 .yy-formulas .yy-formulas-textarea-warp .yy-formulas-textarea {
   width: 100%;
   height: 100%;
   resize: none;
+  font-size: 16px;
 }
 .yy-formulas .yy-formulas-button-warp .yy-formulas-button {
   display: block;
