@@ -223,7 +223,7 @@ class SubjectComponents extends React.Component {
         </div>
         <hr />
         <form className="form-horizontal">
-          {this.state.activeItem && this.state.treeList.length === 0 && (<label>暂无影响因素</label>)}
+          {this.state.activeItem && this.state.treeList.length === 0 && (<label>{this.props.item.notSubject}</label>)}
           {this.state.treeList.length > 0 && (<label>{this.props.item.formTitle}</label>)}
           {this.state.treeList.map((item,index)=>{
             return (

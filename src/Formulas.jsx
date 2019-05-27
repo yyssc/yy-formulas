@@ -218,10 +218,11 @@ Formulas.defaultProps = {
   tabs: [
     {id:0, name: '单据字段', type: 'sys', component: 'Document', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'},
     {id:1, name: '固定值', type: 'sys', component: 'Fixed', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName1: '档案', showName2: '档案值'},
-    {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定'},
+    {id:2, name: '科目转换', type: 'sys', component: 'Subject', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', positionName: '定位：', okName: '确定', formTitle: '影响因素', notSubject: '暂无影响因素'},
     {id:3, name: '辅助核算类型', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算类型',onChange: noop},
     {id:4, name: '辅助核算值', type: 'sys', component: 'Auxiliary', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName: '辅助核算值'},
-    {id:5, name: '函数', type: 'sys', component: 'Function', disabled: false, notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'}
+    {id:5, name: '函数', type: 'sys', component: 'Function', disabled: false, notFoundContent: '暂无数据', positionName: '定位:', okName: '确定'},
+    {id:6, name: '枚举', type: 'sys', component: 'Enum', disabled: false, placeholder: '请输入...', notFoundContent: '暂无数据', showName1: '档案', showName2: '档案值'}
   ],
   activeKey: '0',
   DocumentTreeData: [],

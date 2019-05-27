@@ -14,6 +14,7 @@ class FixedComponents extends React.Component {
       recordValue: {}
     }
   }
+
   componentWillReceiveProps(nextProps){
     // console.log(nextProps.id, this.state.id);
     if(nextProps.id != this.state.id){

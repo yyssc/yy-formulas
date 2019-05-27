@@ -9,6 +9,7 @@ import FixedComponents from './FixedComponents'
 import SubjectComponents from './SubjectComponents'
 import AuxiliaryComponents from './AuxiliaryComponents'
 import FunctionComponents from './FunctionComponents'
+import EnumComponents from './EnumComponents'
 
 class TabsComponents extends React.Component {
   constructor(props) {
@@ -69,6 +70,8 @@ class TabsComponents extends React.Component {
               Component = AuxiliaryComponents
             } else if (item.component === 'Function') {
               Component = FunctionComponents
+            } else if (item.component === 'Enum') {
+              Component = EnumComponents
             }
           }
           return (
