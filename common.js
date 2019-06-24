@@ -64694,7 +64694,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
+ // import jQuery from 'jquery'
 
 var DocumentComponents =
 /*#__PURE__*/
@@ -64711,9 +64711,11 @@ function (_React$Component) {
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.onButClick = _this.onButClick.bind(_assertThisInitialized(_this));
     _this.loop = _this.loop.bind(_assertThisInitialized(_this));
+    var DocumentTreeData = _this.props.DocumentTreeData;
     _this.state = {
       selectedKeys: [],
-      value: ''
+      value: '',
+      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     };
     return _this;
   }
@@ -64752,6 +64754,8 @@ function (_React$Component) {
   }, {
     key: "onButClick",
     value: function onButClick() {
+      var _this2 = this;
+
       var value = this.state.value;
       var selectedKeys = this.state.selectedKeys;
       var selectedKeysList = [];
@@ -64794,6 +64798,44 @@ function (_React$Component) {
 
         this.setState({
           selectedKeys: selectedKeys
+        }, function () {
+          var expandedKeys = [];
+
+          if (selectedKeys && selectedKeys.length > 0 && selectedKeys[0]) {
+            var selectedKeysArr = selectedKeys[0].split('.');
+            selectedKeysArr.pop();
+            selectedKeysArr.forEach(function (k) {
+              if (expandedKeys.length > 0) {
+                expandedKeys.push(expandedKeys[expandedKeys.length - 1] + '.' + k);
+              } else {
+                expandedKeys.push(k);
+              }
+            });
+          }
+
+          if (expandedKeys.length === 0) {
+            expandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : [];
+          }
+
+          _this2.setState({
+            expandedKeys: expandedKeys
+          }, function () {// console.log(this.heightcount,jQuery('.rc-tree.myCls.rc-tree-show-line'),jQuery('.rc-tree-treenode-selected'))
+            // jQuery('.rc-tree-treenode-selected').focus()
+            // $(selectedKeys[0]).focus()
+            // if(jQuery('.rc-tree-treenode-selected') && jQuery('.rc-tree-treenode-selected').length>0){
+            //   jQuery('.rc-tree-treenode-selected').focus()
+            // }
+            // document.getElementById(selectedKeys[0]).focus()
+            // console.log(document.getElementById('mygundongtiao'))
+            // if(jQuery('.rc-tree.myCls.rc-tree-show-line') && jQuery('.rc-tree.myCls.rc-tree-show-line').length>0 && jQuery('.rc-tree-treenode-selected') && jQuery('.rc-tree-treenode-selected').length){
+            //   jQuery('.rc-tree.myCls.rc-tree-show-line').scrollTop = jQuery('.rc-tree-treenode-selected').offsetTop-100
+            // }
+            // console.log(document.getElementByclassName('yy-tab-content'), document.getElementByclassName('rc-tree-node-selected')) // $('. .rc-tree-node-selected')
+            // setTimeout(()=>{
+            //   console.log(document.getElementByclassName('yy-tab-content'), document.getElementByclassName('rc-tree-node-selected'))
+            // },0)
+          }); // console.log(selectedKeys)
+
         });
       } // console.log([selectedKeysList,value,selectedKeys])
 
@@ -64801,7 +64843,7 @@ function (_React$Component) {
   }, {
     key: "loop",
     value: function loop(data) {
-      var _this2 = this;
+      var _this3 = this;
 
       return data.map(function (item) {
         // let isflag = false
@@ -64822,7 +64864,7 @@ function (_React$Component) {
             code: item.code,
             disabled: item.disabled //className={isflag ? 'yy-search-selected' : ''}
 
-          }, _this2.loop(item.children));
+          }, _this3.loop(item.children));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"], {
             title: item.title,
@@ -64838,8 +64880,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var DocumentTreeData = this.props.DocumentTreeData;
-      var defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []; // let value = this.state.value
+      var _this4 = this;
+
+      var DocumentTreeData = this.props.DocumentTreeData; // let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+      // let value = this.state.value
       // let selectedKeys = []
       // const loop = (data)=>{
       //   // console.log(data)
@@ -64870,14 +64914,23 @@ function (_React$Component) {
         onClick: this.onButClick,
         type: "button"
       }, this.props.item.okName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        id: "mygundongtiao",
         prefixCls: "rc-tree",
         showLine: true,
         showIcon: false,
         checkable: false // defaultExpandAll
+        // defaultExpandedKeys={defaultExpandedKeys}
         ,
-        defaultExpandedKeys: defaultExpandedKeys,
-        className: "myCls",
-        autoExpandParent: true,
+        expandedKeys: this.state.expandedKeys,
+        onExpand: function onExpand(expandedKeys) {
+          // console.log(expandedKeys)
+          _this4.setState({
+            expandedKeys: expandedKeys
+          });
+        },
+        className: "myCls" // autoExpandParent
+        // checkStrictly
+        ,
         selectedKeys: this.state.selectedKeys,
         onSelect: this.onSelect
       }, this.loop(DocumentTreeData)));
