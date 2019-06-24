@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { polyfill } from 'react-lifecycles-compat'
 import Tree, { TreeNode } from 'rc-tree'
+// import jQuery from 'jquery'
 
 class DocumentComponents extends React.Component {
   constructor(props){
@@ -10,9 +11,11 @@ class DocumentComponents extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.onButClick = this.onButClick.bind(this)
     this.loop = this.loop.bind(this)
+    let { DocumentTreeData } = this.props
     this.state = {
       selectedKeys: [],
-      value: ''
+      value: '',
+      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     }
   }
 
@@ -71,7 +74,41 @@ class DocumentComponents extends React.Component {
           }
         }
       }
-      this.setState({selectedKeys})
+      this.setState({selectedKeys},()=>{
+        let expandedKeys = []
+        if(selectedKeys && selectedKeys.length>0 && selectedKeys[0]){
+          let selectedKeysArr = selectedKeys[0].split('.')
+          selectedKeysArr.pop()
+          selectedKeysArr.forEach((k)=>{
+            if(expandedKeys.length>0){
+              expandedKeys.push(expandedKeys[expandedKeys.length-1]+'.'+k)
+            }else{
+              expandedKeys.push(k)
+            }
+          })
+        }
+        if(expandedKeys.length===0){
+          expandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+        }
+        this.setState({expandedKeys},()=>{
+          // console.log(this.heightcount,jQuery('.rc-tree.myCls.rc-tree-show-line'),jQuery('.rc-tree-treenode-selected'))
+          // jQuery('.rc-tree-treenode-selected').focus()
+          // $(selectedKeys[0]).focus()
+          // if(jQuery('.rc-tree-treenode-selected') && jQuery('.rc-tree-treenode-selected').length>0){
+          //   jQuery('.rc-tree-treenode-selected').focus()
+          // }
+          // document.getElementById(selectedKeys[0]).focus()
+          // console.log(document.getElementById('mygundongtiao'))
+          // if(jQuery('.rc-tree.myCls.rc-tree-show-line') && jQuery('.rc-tree.myCls.rc-tree-show-line').length>0 && jQuery('.rc-tree-treenode-selected') && jQuery('.rc-tree-treenode-selected').length){
+          //   jQuery('.rc-tree.myCls.rc-tree-show-line').scrollTop = jQuery('.rc-tree-treenode-selected').offsetTop-100
+          // }
+          // console.log(document.getElementByclassName('yy-tab-content'), document.getElementByclassName('rc-tree-node-selected')) // $('. .rc-tree-node-selected')
+          // setTimeout(()=>{
+          //   console.log(document.getElementByclassName('yy-tab-content'), document.getElementByclassName('rc-tree-node-selected'))
+          // },0)
+        })
+        // console.log(selectedKeys)
+      })
     }
     // console.log([selectedKeysList,value,selectedKeys])
   }
@@ -118,7 +155,7 @@ class DocumentComponents extends React.Component {
 
   render() {
     let { DocumentTreeData } = this.props
-    let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+    // let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     // let value = this.state.value
     // let selectedKeys = []
     // const loop = (data)=>{
@@ -152,14 +189,21 @@ class DocumentComponents extends React.Component {
           </button>
         </form>
         <Tree
+          id="mygundongtiao"
           prefixCls="rc-tree"
           showLine
           showIcon={false}
           checkable={false}
           // defaultExpandAll
-          defaultExpandedKeys={defaultExpandedKeys}
+          // defaultExpandedKeys={defaultExpandedKeys}
+          expandedKeys={this.state.expandedKeys}
+          onExpand={(expandedKeys)=>{
+            // console.log(expandedKeys)
+            this.setState({expandedKeys})
+          }}
           className="myCls"
-          autoExpandParent
+          // autoExpandParent
+          // checkStrictly
           selectedKeys={this.state.selectedKeys}
           onSelect={this.onSelect}
         >

@@ -1,6 +1,6 @@
 {
   "name": "yy-formulas",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "yy formulas fc",
   "main": "./lib/index",
   "module": "./es/index",
