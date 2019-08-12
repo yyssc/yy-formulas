@@ -64711,11 +64711,13 @@ function (_React$Component) {
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.onButClick = _this.onButClick.bind(_assertThisInitialized(_this));
     _this.loop = _this.loop.bind(_assertThisInitialized(_this));
+    _this.setFname = _this.setFname.bind(_assertThisInitialized(_this));
     var DocumentTreeData = _this.props.DocumentTreeData;
     _this.state = {
       selectedKeys: [],
       value: '',
-      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : [],
+      selectedKeysList: []
     };
     return _this;
   }
@@ -64748,17 +64750,15 @@ function (_React$Component) {
     value: function onChange(event) {
       var value = event.target.value;
       this.setState({
-        value: value
+        value: value,
+        selectedKeysList: []
       });
     }
   }, {
     key: "onButClick",
     value: function onButClick() {
-      var _this2 = this;
-
-      var value = this.state.value;
-      var selectedKeys = this.state.selectedKeys;
       var selectedKeysList = [];
+      var value = this.state.value;
       var DocumentTreeData = this.props.DocumentTreeData;
 
       var loop = function loop(data) {
@@ -64766,7 +64766,7 @@ function (_React$Component) {
           var reg = new RegExp(value, 'igm');
 
           if (reg.test(item.title)) {
-            selectedKeysList.push(item.key);
+            selectedKeysList.push(item);
           }
 
           if (item.children && item.children.length > 0) {
@@ -64777,49 +64777,49 @@ function (_React$Component) {
 
       if (value) {
         loop(DocumentTreeData);
+      }
 
-        if (selectedKeysList.length > 0) {
-          if (selectedKeys.length === 0) {
-            selectedKeys.push(selectedKeysList[0]);
-          } else {
-            if (selectedKeysList.includes(selectedKeys[0])) {
-              var index = selectedKeysList.indexOf(selectedKeys[0]);
-
-              if (selectedKeysList.length > index) {
-                selectedKeys = [selectedKeysList[index + 1]];
-              } else {
-                selectedKeys = [selectedKeysList[0]];
+      this.setState({
+        selectedKeysList: selectedKeysList
+      });
+      /*
+      let selectedKeys = this.state.selectedKeys
+      if(value){
+        loop(DocumentTreeData)
+        if(selectedKeysList.length > 0){
+          if(selectedKeys.length === 0) {
+            selectedKeys.push(selectedKeysList[0])
+          }else{
+            if(selectedKeysList.includes(selectedKeys[0])){
+              let index = selectedKeysList.indexOf(selectedKeys[0])
+              if(selectedKeysList.length>index){
+                selectedKeys = [selectedKeysList[index+1]]
+              }else{
+                selectedKeys = [selectedKeysList[0]]
               }
-            } else {
-              selectedKeys = [selectedKeysList[0]];
+            }else{
+              selectedKeys=[selectedKeysList[0]]
             }
           }
         }
-
-        this.setState({
-          selectedKeys: selectedKeys
-        }, function () {
-          var expandedKeys = [];
-
-          if (selectedKeys && selectedKeys.length > 0 && selectedKeys[0]) {
-            var selectedKeysArr = selectedKeys[0].split('.');
-            selectedKeysArr.pop();
-            selectedKeysArr.forEach(function (k) {
-              if (expandedKeys.length > 0) {
-                expandedKeys.push(expandedKeys[expandedKeys.length - 1] + '.' + k);
-              } else {
-                expandedKeys.push(k);
+        this.setState({selectedKeys},()=>{
+          let expandedKeys = []
+          if(selectedKeys && selectedKeys.length>0 && selectedKeys[0]){
+            let selectedKeysArr = selectedKeys[0].split('.')
+            selectedKeysArr.pop()
+            selectedKeysArr.forEach((k)=>{
+              if(expandedKeys.length>0){
+                expandedKeys.push(expandedKeys[expandedKeys.length-1]+'.'+k)
+              }else{
+                expandedKeys.push(k)
               }
-            });
+            })
           }
-
-          if (expandedKeys.length === 0) {
-            expandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : [];
+          if(expandedKeys.length===0){
+            expandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
           }
-
-          _this2.setState({
-            expandedKeys: expandedKeys
-          }, function () {// console.log(this.heightcount,jQuery('.rc-tree.myCls.rc-tree-show-line'),jQuery('.rc-tree-treenode-selected'))
+          this.setState({expandedKeys},()=>{
+            // console.log(this.heightcount,jQuery('.rc-tree.myCls.rc-tree-show-line'),jQuery('.rc-tree-treenode-selected'))
             // jQuery('.rc-tree-treenode-selected').focus()
             // $(selectedKeys[0]).focus()
             // if(jQuery('.rc-tree-treenode-selected') && jQuery('.rc-tree-treenode-selected').length>0){
@@ -64834,16 +64834,34 @@ function (_React$Component) {
             // setTimeout(()=>{
             //   console.log(document.getElementByclassName('yy-tab-content'), document.getElementByclassName('rc-tree-node-selected'))
             // },0)
-          }); // console.log(selectedKeys)
-
-        });
-      } // console.log([selectedKeysList,value,selectedKeys])
-
+          })
+          // console.log(selectedKeys)
+        })
+      }
+      // console.log([selectedKeysList,value,selectedKeys])
+      */
     }
   }, {
     key: "loop",
     value: function loop(data) {
-      var _this3 = this;
+      var _this2 = this;
+
+      var selectedKeysList = this.state.selectedKeysList;
+      var value = this.state.value;
+
+      if (value && selectedKeysList.length > 0) {
+        // console.log(selectedKeysList)
+        return selectedKeysList.map(function (item) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"], {
+            title: item.fname,
+            isLeaf: true,
+            key: item.key,
+            code: item.code,
+            disabled: item.disabled //className={isflag ? 'yy-search-selected' : ''}
+
+          });
+        });
+      }
 
       return data.map(function (item) {
         // let isflag = false
@@ -64864,7 +64882,7 @@ function (_React$Component) {
             code: item.code,
             disabled: item.disabled //className={isflag ? 'yy-search-selected' : ''}
 
-          }, _this3.loop(item.children));
+          }, _this2.loop(item.children));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"], {
             title: item.title,
@@ -64878,11 +64896,31 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "setFname",
+    value: function setFname(data, name) {
+      var _this3 = this;
+
+      return data.map(function (item) {
+        var title = item.title,
+            children = item.children;
+        var fname = name ? name.trim() + '/' + title : title;
+        item.fname = fname; // console.log(JSON.stringify(children));
+
+        if (children && children.length > 0) {
+          item.children = _this3.setFname(children, fname);
+        }
+
+        return item; // console.log()
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
-      var DocumentTreeData = this.props.DocumentTreeData; // let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+      var DocumentTreeData = this.props.DocumentTreeData;
+      DocumentTreeData = this.setFname(DocumentTreeData); // console.log(DocumentTreeData)
+      // let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
       // let value = this.state.value
       // let selectedKeys = []
       // const loop = (data)=>{
@@ -65023,7 +65061,7 @@ function (_React$Component) {
           var str = '';
 
           if (value.id) {
-            str = ' getCode("' + _this2.state.record.code + '","' + value.title + '") ';
+            str = ' getCode("' + _this2.state.record2.code + '","' + value.title + '") ';
 
             _this2.props.onInsertValue(str);
 
@@ -66056,7 +66094,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
+        onKeyPress: function onKeyPress(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+        }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           marginLeft: '10px'
