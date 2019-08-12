@@ -21,7 +21,7 @@ class EnumComponents extends React.Component {
       if(type==='record2'){
         let str = ''
         if(value.id){
-          str = ' getCode("'+this.state.record.code+'","'+value.title+'") '
+          str = ' getCode("'+this.state.record2.code+'","'+value.title+'") '
           this.props.onInsertValue(str)
           this.props.onDesc('GetCode')
         }

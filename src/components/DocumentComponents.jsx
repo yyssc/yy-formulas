@@ -11,11 +11,13 @@ class DocumentComponents extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.onButClick = this.onButClick.bind(this)
     this.loop = this.loop.bind(this)
+    this.setFname = this.setFname.bind(this)
     let { DocumentTreeData } = this.props
     this.state = {
       selectedKeys: [],
       value: '',
-      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
+      expandedKeys: DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : [],
+      selectedKeysList: []
     }
   }
 
@@ -37,25 +39,32 @@ class DocumentComponents extends React.Component {
 
   onChange(event) {
     let value = event.target.value
-    this.setState({value})
+    this.setState({value,selectedKeysList:[]})
   }
 
   onButClick(){
-    let value = this.state.value
-    let selectedKeys = this.state.selectedKeys
     let selectedKeysList = []
+    let value = this.state.value
     let { DocumentTreeData } = this.props
     const loop = (data) => {
       data.map((item)=>{
         let reg = new RegExp(value,'igm')
         if(reg.test(item.title)){
-          selectedKeysList.push(item.key)
+          selectedKeysList.push(item)
         }
         if(item.children && item.children.length > 0){
           loop(item.children)
         }
       })
     }
+    if(value){
+      loop(DocumentTreeData)
+    }
+    this.setState({
+      selectedKeysList
+    })
+    /*
+    let selectedKeys = this.state.selectedKeys
     if(value){
       loop(DocumentTreeData)
       if(selectedKeysList.length > 0){
@@ -111,9 +120,27 @@ class DocumentComponents extends React.Component {
       })
     }
     // console.log([selectedKeysList,value,selectedKeys])
+    */
   }
 
   loop(data){
+    let selectedKeysList = this.state.selectedKeysList
+    let value = this.state.value
+    if(value && selectedKeysList.length>0){
+      // console.log(selectedKeysList)
+      return selectedKeysList.map((item)=>{
+        return (
+          <TreeNode
+            title={item.fname}
+            isLeaf
+            key={item.key}
+            code={item.code}
+            disabled={item.disabled}
+            //className={isflag ? 'yy-search-selected' : ''}
+          />
+        )
+      })
+    }
     return data.map((item)=>{
       // let isflag = false
       // if(value && value.length > 0){
@@ -152,9 +179,23 @@ class DocumentComponents extends React.Component {
       }
     })
   }
-
+  setFname(data,name){
+    return data.map((item)=>{
+      let {title, children}=item
+      let fname = name ? name.trim()+'/'+title : title
+      item.fname = fname
+      // console.log(JSON.stringify(children));
+      if(children && children.length>0){
+        item.children = this.setFname(children,fname)
+      }
+      return item
+      // console.log()
+    })
+  }
   render() {
     let { DocumentTreeData } = this.props
+    DocumentTreeData = this.setFname(DocumentTreeData)
+    // console.log(DocumentTreeData)
     // let defaultExpandedKeys = DocumentTreeData.length > 0 && DocumentTreeData[0].key ? [DocumentTreeData[0].key] : []
     // let value = this.state.value
     // let selectedKeys = []
