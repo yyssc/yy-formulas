@@ -8,6 +8,7 @@ class DocumentComponents extends React.Component {
   constructor(props){
     super(props)
     this.onSelect = this.onSelect.bind(this)
+    this.onDoubleClick = this.onDoubleClick.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onButClick = this.onButClick.bind(this)
     this.loop = this.loop.bind(this)
@@ -21,18 +22,30 @@ class DocumentComponents extends React.Component {
     }
   }
 
-  onSelect(selectkey) {
+  onDoubleClick(item){
+    let {code} = item
+    let key = code.substr(code.indexOf('.') + 1)
+    this.props.onInsertValue(' '+key+ ' ')
+  }
+
+  onSelect(selectkey,...arr) {
+    // console.log(selectkey,...arr);
     // console.log([selectkey,...arr])
+    // let selectedKeys = []
+    // if(selectkey.length > 0){
+    //   selectedKeys = selectkey
+    //   let code = selectkey[0]
+    //   let key = code.substr(code.indexOf('.') + 1)
+    //   this.props.onInsertValue(' '+key+ ' ')
+    // }else if(this.state.selectedKeys.length > 0){
+    //   let code = this.state.selectedKeys[0]
+    //   let key = code.substr(code.indexOf('.') + 1)
+    //   this.props.onInsertValue(' '+key+ ' ')
+    // }
+    // this.setState({selectedKeys})
     let selectedKeys = []
     if(selectkey.length > 0){
       selectedKeys = selectkey
-      let code = selectkey[0]
-      let key = code.substr(code.indexOf('.') + 1)
-      this.props.onInsertValue(' '+key+ ' ')
-    }else if(this.state.selectedKeys.length > 0){
-      let code = this.state.selectedKeys[0]
-      let key = code.substr(code.indexOf('.') + 1)
-      this.props.onInsertValue(' '+key+ ' ')
     }
     this.setState({selectedKeys})
   }
@@ -155,7 +168,8 @@ class DocumentComponents extends React.Component {
       if(item.children && item.children.length > 0){
         return (
           <TreeNode
-            title={item.title}
+            //title={item.title}
+            title={(<span onDoubleClick={this.onDoubleClick.bind(this,item)}>{item.title}</span>)}
             isLeaf={false}
             key={item.key}
             code={item.code}
@@ -168,7 +182,7 @@ class DocumentComponents extends React.Component {
       }else{
         return (
           <TreeNode
-            title={item.title}
+            title={(<span onDoubleClick={this.onDoubleClick.bind(this,item)}>{item.title}</span>)}
             isLeaf
             key={item.key}
             code={item.code}
@@ -247,6 +261,7 @@ class DocumentComponents extends React.Component {
           // checkStrictly
           selectedKeys={this.state.selectedKeys}
           onSelect={this.onSelect}
+          //expandAction='doubleClick'
         >
           {this.loop(DocumentTreeData)}
         </Tree>
