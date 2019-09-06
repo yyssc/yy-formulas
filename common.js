@@ -64708,6 +64708,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DocumentComponents).call(this, props));
     _this.onSelect = _this.onSelect.bind(_assertThisInitialized(_this));
+    _this.onDoubleClick = _this.onDoubleClick.bind(_assertThisInitialized(_this));
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.onButClick = _this.onButClick.bind(_assertThisInitialized(_this));
     _this.loop = _this.loop.bind(_assertThisInitialized(_this));
@@ -64723,22 +64724,33 @@ function (_React$Component) {
   }
 
   _createClass(DocumentComponents, [{
+    key: "onDoubleClick",
+    value: function onDoubleClick(item) {
+      var code = item.code;
+      var key = code.substr(code.indexOf('.') + 1);
+      this.props.onInsertValue(' ' + key + ' ');
+    }
+  }, {
     key: "onSelect",
     value: function onSelect(selectkey) {
+      // console.log(selectkey,...arr);
       // console.log([selectkey,...arr])
+      // let selectedKeys = []
+      // if(selectkey.length > 0){
+      //   selectedKeys = selectkey
+      //   let code = selectkey[0]
+      //   let key = code.substr(code.indexOf('.') + 1)
+      //   this.props.onInsertValue(' '+key+ ' ')
+      // }else if(this.state.selectedKeys.length > 0){
+      //   let code = this.state.selectedKeys[0]
+      //   let key = code.substr(code.indexOf('.') + 1)
+      //   this.props.onInsertValue(' '+key+ ' ')
+      // }
+      // this.setState({selectedKeys})
       var selectedKeys = [];
 
       if (selectkey.length > 0) {
         selectedKeys = selectkey;
-        var code = selectkey[0];
-        var key = code.substr(code.indexOf('.') + 1);
-        this.props.onInsertValue(' ' + key + ' ');
-      } else if (this.state.selectedKeys.length > 0) {
-        var _code = this.state.selectedKeys[0];
-
-        var _key = _code.substr(_code.indexOf('.') + 1);
-
-        this.props.onInsertValue(' ' + _key + ' ');
       }
 
       this.setState({
@@ -64875,8 +64887,11 @@ function (_React$Component) {
         //   // console.log(isflag)
         // }
         if (item.children && item.children.length > 0) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"], {
-            title: item.title,
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"] //title={item.title}
+          , {
+            title: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              onDoubleClick: _this2.onDoubleClick.bind(_this2, item)
+            }, item.title),
             isLeaf: false,
             key: item.key,
             code: item.code,
@@ -64885,7 +64900,9 @@ function (_React$Component) {
           }, _this2.loop(item.children));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_tree__WEBPACK_IMPORTED_MODULE_3__["TreeNode"], {
-            title: item.title,
+            title: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              onDoubleClick: _this2.onDoubleClick.bind(_this2, item)
+            }, item.title),
             isLeaf: true,
             key: item.key,
             code: item.code,
@@ -64970,7 +64987,8 @@ function (_React$Component) {
         // checkStrictly
         ,
         selectedKeys: this.state.selectedKeys,
-        onSelect: this.onSelect
+        onSelect: this.onSelect //expandAction='doubleClick'
+
       }, this.loop(DocumentTreeData)));
     }
   }]);
