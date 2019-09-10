@@ -64726,9 +64726,9 @@ function (_React$Component) {
   _createClass(DocumentComponents, [{
     key: "onDoubleClick",
     value: function onDoubleClick(item) {
-      var code = item.code;
-      var key = code.substr(code.indexOf('.') + 1);
-      this.props.onInsertValue(' ' + key + ' ');
+      var key = item.key;
+      var code = key.substr(key.indexOf('.') + 1);
+      this.props.onInsertValue(' ' + code + ' ');
     }
   }, {
     key: "onSelect",
