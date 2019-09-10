@@ -23,9 +23,9 @@ class DocumentComponents extends React.Component {
   }
 
   onDoubleClick(item){
-    let {code} = item
-    let key = code.substr(code.indexOf('.') + 1)
-    this.props.onInsertValue(' '+key+ ' ')
+    let {key} = item
+    let code = key.substr(key.indexOf('.') + 1)
+    this.props.onInsertValue(' '+code+ ' ')
   }
 
   onSelect(selectkey,...arr) {
