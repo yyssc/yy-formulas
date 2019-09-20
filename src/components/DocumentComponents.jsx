@@ -144,7 +144,7 @@ class DocumentComponents extends React.Component {
       return selectedKeysList.map((item)=>{
         return (
           <TreeNode
-            title={item.fname}
+            title={(<span onDoubleClick={this.onDoubleClick.bind(this,item)}>{item.fname}</span>)}
             isLeaf
             key={item.key}
             code={item.code}
